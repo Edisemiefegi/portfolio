@@ -1,21 +1,19 @@
 <template>
-  <div class="flex flex-col gap-12">
-    <div>
-      <Navbar />
-      <section id="home">
-        <sectionsHome />
-      </section>
-    </div>
+  <main class="flex flex-col dark:bg-gray-800 dark:text-white">
+    <Navbar />
+    <section id="home">
+      <sectionsHome />
+    </section>
 
-    <section id="about">
+    <section id="about" class="mx-auto md:w-11/12 w-4/5">
       <sectionsAbout />
     </section>
 
-    <section id="projects">
+    <section id="projects" class="mx-auto md:w-11/12 w-4/5">
       <sectionsProject />
     </section>
 
-    <section id="skills">
+    <section id="skills" class="mx-auto md:w-11/12 w-4/5">
       <sectionsSkills />
     </section>
 
@@ -26,9 +24,10 @@
     <section id="contact" class="mb-20">
       <sectionsContact />
     </section>
-  </div>
+  </main>
 </template>
 
+<script setup></script>
 <style>
 html {
   scroll-behavior: smooth;

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="bg-white cursor-pointer hover:scale-105 hover:shadow-2xl rounded-xl border border-gray-100 shadow-sm flex flex-col items-center"
+    class="bg-white cursor-pointer hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 ease-in-out rounded-xl border border-gray-100 dark:border-gray-700 dark:text-white dark:bg-gray-800 shadow-sm flex flex-col items-center"
   >
     <div class="h-50 w-full overflow-hidden rounded-t-xl bg-gray-600">
       <img :src="content?.image" alt="" class="object-cover w-full h-full" />
     </div>
     <div class="md:p-8 p-4 space-y-3 w-full">
       <h1 class="text-normal md:text-xl font-bold">{{ content?.heading }}</h1>
-      <p class="text-gray-600">{{ content?.summary }}</p>
+      <p class="text-gray-600 dark:text-gray-400">{{ content?.summary }}</p>
       <div class="flex gap-2 w-full flex-wrap">
         <Button
           class="text-xs"

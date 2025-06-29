@@ -1,22 +1,25 @@
 <template>
-  <div class="mx-auto w-11/12 space-y-6">
+  <div class="space-y-6 py-12">
     <div class="text-center space-y-8">
       <h1 class="md:text-7xl text-4xl font-bold">Tech Stack</h1>
-      <p class="text-gray-700">
+      <p class="text-gray-700 dark:text-gray-400">
         Tools and technologies I use to bring ideas to life. Hover over each
         skill to learn more about my experience.
       </p>
     </div>
 
-    <div class="flex flex-wrap gap-8">
+    <div
+      class="flex flex-wrap gap-8 w-11/12 mx-auto items-center justify-center"
+    >
       <div
         v-for="skill in skills"
         :key="skill"
-        class="p-2 rounded-md bg-gray-100"
+        class="p-2 rounded-md bg-gray-100 dark:bg-gray-300"
       >
         <button
           data-aos="fade-up"
-          data-aos-duration="3000"
+          data-aos-duration="100"
+          :data-aos-delay="skill.delay"
           :class="`${skill.color} hover:scale-105  p-8 rounded-md flex flex-col justify-center items-center `"
         >
           <div class="w-10 h-10">
@@ -35,9 +38,9 @@
       class="flex w-full flex-wrap justify-between gap-3 md:px-20 py-10 items-center"
     >
       <div v-for="item in content" :key="item" class="text-center">
-        <p class="text-4xl">{{ item.icon }}</p>
-        <p class="text-4xl font-bold">{{ item.number }}</p>
-        <p class="text-gray-600">{{ item.text }}</p>
+        <p class="md:text-4xl text-2xl">{{ item.icon }}</p>
+        <p class="md:text-4xl text-2xl font-bold">{{ item.number }}</p>
+        <p class="text-gray-600 dark:text-gray-400">{{ item.text }}</p>
       </div>
     </div>
   </div>
@@ -49,40 +52,41 @@ const skills = ref([
     icon: "/stack/js.png",
     name: "Javascript",
     color: "bg-[#F9E54B]",
+    delay: "300",
   },
   {
     icon: "/stack/vue.png",
-
+    delay: "400",
     name: "Vue",
     color: "bg-[#437162]",
   },
   {
     icon: "/stack/nuxt.png",
-
+    delay: "500",
     name: "Nuxt",
     color: "bg-[#33E39B]",
   },
   {
     icon: "/stack/ts.png",
-
+    delay: "600",
     name: "Typescript",
     color: "bg-[#5A93D1]",
   },
   {
     icon: "/stack/react.png",
-
+    delay: "700",
     name: "React",
     color: "bg-[#81E1FC]",
   },
   {
     icon: "/stack/figma.png",
-
+    delay: "800",
     name: "Figma",
     color: "bg-[#FD954C]",
   },
   {
     icon: "/stack/github.png",
-
+    delay: "900",
     name: "Github",
     color: "bg-[#238765]",
   },

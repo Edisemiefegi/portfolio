@@ -1,9 +1,9 @@
 <template>
   <div class="h-full w-full relative">
-    <div class="mx-auto w-11/12 space-y-10 pt-6">
+    <div class="space-y-10 pt-16 mx-auto w-4/5 md:w-11/12">
       <div class="text-center space-y-8">
         <h1 class="md:text-7xl text-4xl font-bold">Let's Build Together</h1>
-        <p class="text-gray-700">
+        <p class="text-gray-700 dark:text-gray-400">
           Got a project in mind? A crazy idea that needs bringing to life? Or
           just want to chat about the latest in web development? I'm all ears!
           👂
@@ -14,43 +14,35 @@
         <!-- send message -->
         <div
           v-if="!messageSent"
-          class="border z-20 w-full md:w-3/6 h-fit rounded-md border-gray-200 p-6 text-sm space-y-6"
+          class="border z-20 w-full md:w-3/6 h-fit rounded-md border-gray-200 dark:border-gray-600 p-6 text-sm space-y-6"
         >
           <p class="font-medium text-2xl">Send me a message</p>
-          <form @submit.prevent="submitForm" class="flex flex-col gap-8 w-full">
-            <div class="flex gap-6">
-              <div>
-                <p class="font-medium">Name</p>
-                <input
-                  v-model="form.name"
-                  required
-                  name="name"
-                  placeholder="Your name"
-                  class="outline-none mt-2 w-full p-2 rounded-sm border border-gray-100"
-                />
-              </div>
-              <div>
-                <p>Email</p>
-                <input
-                  v-model="form.email"
-                  required
-                  name="email"
-                  type="email"
-                  placeholder="Your@email.com"
-                  class="outline-none p-2 mt-2 rounded-sm border border-gray-100"
-                />
-              </div>
-            </div>
-            <div>
-              <p>Subject</p>
-              <input
-                v-model="form.subject"
+          <form @submit.prevent="submitForm" class="flex flex-col gap-6 w-full">
+            <div class="grid grid-cols-2 gap-6 w-full">
+              <Input
+                v-model="form.name"
+                name="name"
+                placeholder="Your name"
+                label="name"
                 required
-                name="subject"
-                placeholder="What's this about?"
-                class="outline-none w-full p-2 mt-2 rounded-sm border border-gray-100"
+              />
+
+              <Input
+                v-model="form.email"
+                name="email"
+                type="email"
+                placeholder="Your@email.com"
+                label="Email"
+                required
               />
             </div>
+            <Input
+              v-model="form.subject"
+              name="subject"
+              placeholder="What's this about?"
+              label="Subject"
+              required
+            />
             <input type="hidden" name="_captcha" value="false" />
 
             <div>
@@ -60,11 +52,13 @@
                 name="message"
                 required
                 placeholder="Tell  me about your project, idea, or just say hi!"
-                class="outline-none w-full h-20 p-2 mt-2 rounded-sm border border-gray-100"
+                class="outline-none dark:border-gray-600 w-full h-20 p-2 mt-2 rounded-sm border border-gray-100"
               />
             </div>
 
-            <Button>Send Message</Button>
+            <Button :bg="'dark:bg-white'" :text-color="'dark:text-black'"
+              >Send Message</Button
+            >
           </form>
         </div>
 
@@ -74,73 +68,70 @@
           @reset="resetForm"
         />
 
-        <!-- quick connect -->
         <div class="md:w-3/6 z-20 w-full flex flex-col gap-6">
+          <!-- quick connect -->
           <div
-            class="border w-full rounded-md border-gray-200 p-6 text-sm space-y-6"
+            class="border dark:border-gray-600 w-full rounded-md border-gray-200 p-6 text-sm space-y-6"
           >
             <p class="font-medium text-2xl">Quick Connect</p>
-            <div class="flex flex-col gap-8 w-full">
+            <div class="flex flex-col gap-6 w-full">
               <Button
-                class="w-full mt-2"
-                :bg="'bg-gray-100'"
-                :text-color="'text-black'"
+                class="w-full text-start"
+                :bg="'bg-gray-100 dark:bg-gray-600'"
+                :text-color="'text-black dark:text-white'"
                 @click="copyEmail"
               >
                 <i class="pi pi-envelope"></i>
                 {{ email }}
               </Button>
-              <a
-                :href="resumeLink"
-                class="w-full mt-2 bg-gray-100 text-center p-2 rounded-md"
+              <Button
+                class="w-full text-start"
+                :bg="'bg-gray-100 dark:bg-gray-600'"
+                :text-color="'text-black dark:text-white'"
               >
-                <i class="pi pi-download"> Download Resume</i>
-              </a>
+                <a :href="resumeLink">
+                  <i class="pi pi-download mr-1"> </i
+                  ><span>Download Resume</span>
+                </a>
+              </Button>
             </div>
           </div>
 
           <!-- find me online -->
           <div
-            class="border z-20 w-full rounded-md border-gray-200 p-6 text-sm space-y-6"
+            class="border dark:border-gray-600 z-20 w-full rounded-md border-gray-200 p-6 text-sm space-y-6"
           >
             <p class="font-medium text-2xl">Find me online</p>
             <div class="flex gap-8 w-full">
               <a
-                href="https://github.com/Edisemiefegi"
+                v-for="item in handles"
+                :key="item.link"
+                :href="item.link"
                 target="_blank"
-                class="w-3/6 p-8 flex flex-col gap-2 cursor-pointer items-center justify-center rounded-sm bg-gray-100"
+                class="w-3/6 p-8 flex flex-col gap-2 cursor-pointer items-center justify-center rounded-sm dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 hover:bg-gray-300 bg-gray-100"
               >
-                <i class="pi pi-github"></i>
+                <i :class="item.icon"></i>
 
-                Github
-              </a>
-
-              <a
-                href="https://linkedin.com/in/efegi-edisemi"
-                target="_blank"
-                class="w-3/6 p-8 flex cursor-pointer flex-col gap-2 items-center justify-center rounded-sm bg-gray-100"
-              >
-                <i class="pi pi-linkedin"></i>
-                LinkedIn
+                {{ item.name }}
               </a>
             </div>
           </div>
-
-          <!-- response time  -->
-          <div
-            class="border w-full rounded-md border-gray-200 p-6 text-sm space-y-6"
-          >
-            <p class="font-medium text-2xl">⚡ Response Time</p>
-            <p>
-              I typically respond within 24 hours. For urgent projects, feel
-              free to mention it in your message!
-            </p>
-          </div>
         </div>
+      </div>
+
+      <!-- response time  -->
+      <div
+        class="border dark:border-gray-600 dark:text-white w-full rounded-md border-gray-200 p-6 text-sm space-y-6 text-center"
+      >
+        <p class="font-medium text-2xl">⚡ Response Time</p>
+        <p>
+          I typically respond within 24 hours. For urgent projects, feel free to
+          mention it in your message!
+        </p>
       </div>
     </div>
 
-    <div class="w-full h-full absolute top-0 left-0 overflow-hidden">
+    <div class="!w-[100%] h-full absolute top-0 left-0 overflow-hidden">
       <Circle />
     </div>
   </div>
@@ -150,6 +141,19 @@
 const email = "edisemiefegi@gmail.com";
 const resumeLink = "/Resume.pdf";
 const messageSent = ref(false);
+
+const handles = ref([
+  {
+    name: "Github",
+    link: "https://github.com/Edisemiefegi",
+    icon: "pi pi-github",
+  },
+  {
+    name: "LinkedIn",
+    link: "https://linkedin.com/in/efegi-edisemi",
+    icon: "pi pi-linkedin",
+  },
+]);
 
 const form = ref({
   name: "",

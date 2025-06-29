@@ -1,9 +1,9 @@
 <template>
-  <div class="h-full">
-    <div class="mx-auto w-11/12 overflow-hidden space-y-10 py-16 relative">
+  <div class="h-full py-16">
+    <div class="overflow-hidden space-y-10 arelative">
       <div class="text-center space-y-8">
         <h1 class="md:text-7xl text-4xl font-bold">My Journey</h1>
-        <p class="text-gray-700">
+        <p class="text-gray-700 dark:text-gray-400 w-full md:w-10/12 mx-auto">
           I’m a frontend developer focused on building clean, responsive,
           user-first interfaces. I use Vue, Nuxt, React and Tailwind to turn
           ideas into web experiences that work — fast, accessible, and honest.
@@ -24,20 +24,20 @@
           v-for="(card, index) in cards"
           :key="card.title + card.year"
           class="relative flex items-center"
-          :class="index % 2 === 0 ? 'justify-start' : 'justify-end'"
+          :class="index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'"
         >
           <div
             :data-aos="card.aos"
-            class="bg-white ease-out hover:scale-105 rounded-xl hover:shadow-lg border shadow-sm border-gray-200 p-6 space-y-4 w-full max-w-lg"
-            :class="index % 2 === 0 ? 'mr-auto' : 'ml-auto'"
+            class="bg-white dark:bg-gray-800 dark:text-white hover:-translate-y-1 hover:scale-105 transition-all duration-500 ease-in-out rounded-xl hover:shadow-lg border shadow-sm border-gray-200 dark:border-gray-600 p-6 space-y-4 md:w-full w-10/12 max-w-lg"
+            :class="index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'"
           >
             <p class="text-4xl font-bold">{{ card.year }}</p>
             <p class="text-xl font-semibold">{{ card.title }}</p>
-            <p class="text-gray-600">{{ card.text }}</p>
+            <p class="text-gray-600 dark:text-gray-400">{{ card.text }}</p>
           </div>
 
           <div
-            class="absolute left-1/2 transform -translate-x-1/2 bg-gray-800 border-4 border-white w-14 h-14 rounded-full flex items-center justify-center z-10"
+            class="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 mb-4 md:mb-0 bg-gray-800 border-4 border-white w-14 h-14 rounded-full flex items-center justify-center z-10"
           >
             <i :class="card.icon" class="pi text-white text-xl"></i>
           </div>
@@ -48,10 +48,10 @@
       <div class="flex h-full items-center justify-center">
         <div
           data-aos="flip-left"
-          class="p-8 bg-white hover:scale-105 shadow-md rounded-md space-y-4 w-xl text-center"
+          class="p-8 bg-white dark:bg-gray-800 hover:scale-105 shadow-md rounded-md space-y-4 w-xl text-center"
         >
           <p class="font-bold text-2xl">Beyound the code</p>
-          <p class="text-gray-600">
+          <p class="text-gray-600 dark:text-gray-400 text-justify">
             I'm a curious mind and a lifelong learner. Outside of coding, I'm a
             game lover and a big fan of K-Dramas — there’s nothing like a good
             storyline to unwind and recharge. I enjoy exploring design trends,

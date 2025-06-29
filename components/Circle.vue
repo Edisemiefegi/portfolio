@@ -1,8 +1,8 @@
 <template>
-  <div class="circle"></div>
+  <div class="circle dark:circle-dark"></div>
 </template>
 
-<style scoped>
+<style>
 .circle {
   position: absolute;
   top: 0%;
@@ -16,6 +16,9 @@
   filter: blur(60px);
   animation: floatTilt 10s ease-in-out infinite alternate;
   z-index: -1;
+}
+.circle-dark {
+  background: radial-gradient(circle, #dbe0e6 0%, #e5e7eb 50%, #f3f4f6 100%);
 }
 
 @keyframes floatTilt {

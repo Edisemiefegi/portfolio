@@ -5,7 +5,7 @@
   >
     <div
       @click.stop
-      class="bg-white relative rounded-xl shadow-sm w-4/5 h-4/5 overflow-y-auto flex flex-col items-center"
+      class="bg-white relative md:rounded-xl shadow-sm md:w-4/5 md:h-4/5 w-full h-full overflow-y-auto no-scrollbar flex flex-col items-center"
     >
       <button
         @click="emit('close')"
@@ -13,10 +13,10 @@
       >
         <i class="pi pi-times text-sm"></i>
       </button>
-      <div class="h-2/3 w-full overflow-hidden rounded-t-xl bg-gray-600">
+      <div class="h-2/3 w-full overflow-hidden md:rounded-t-xl bg-gray-600">
         <img :src="content?.image" alt="" class="object-cover w-full h-full" />
       </div>
-      <div class="md:p-12 p-6 space-y-6 w-full h-2/5 shadow-sm">
+      <div class="p-12 space-y-6 w-full h-2/5 shadow-sm">
         <div class="md:flex-row flex flex-col gap-3 md:justify-between">
           <div class="">
             <h1 class="text-xl md:text-2xl font-bold">
@@ -36,9 +36,11 @@
               Code
             </Button>
             <Button :size="'sm'" class="">
-              <i class="pi pi-external-link"></i>
-              Live Demo</Button
-            >
+              <a :href="content?.demo">
+                <i class="pi pi-external-link"></i>
+                Live Demo
+              </a>
+            </Button>
           </div>
         </div>
 
@@ -89,3 +91,13 @@ const handleOutsideClick = () => {
   emit("close");
 };
 </script>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>

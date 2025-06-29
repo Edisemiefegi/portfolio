@@ -1,8 +1,9 @@
 <template>
-  <div class="relative">
+  <div class="relative dark:bg-gray-800">
     <header
       :class="[
-        'fixed border-b border-gray-200 top-0 left-0 z-50 transition-all duration-300 ease-in-out w-full overflow-hidden',
+        'fixed border-b dark:border-gray-700 border-gray-200 top-0 left-0 z-50 transition-all duration-300 ease-in-out w-full overflow-hidden',
+        ' dark:bg-gray-800 dark:text-white',
         Scroll,
       ]"
     >
@@ -20,9 +21,9 @@
                 :href="item.href"
                 :class="[
                   active === item.href
-                    ? 'bg-gray-300 p-2 !text-black rounded-md px-3'
-                    : '',
-                  'hover:text-black ease-in duration-300 hover:-translate-y-0.5 hover:scale-110 transition',
+                    ? 'bg-gray-300 dark:bg-gray-700 dark:!text-white p-2 !text-black rounded-md px-3'
+                    : 'text-gray-500 dark:text-gray-300',
+                  'hover:text-black dark:hover:text-white ease-in duration-300 hover:-translate-y-0.5 hover:scale-110 transition',
                 ]"
               >
                 {{ item.name }}
@@ -32,10 +33,13 @@
 
           <!-- Dev Mode -->
           <p
-            class="hover:bg-gray-100 px-3 py-1.5 font-medium text-sm cursor-pointer rounded-md flex items-center gap-2 ease-in duration-300 hover:-translate-y-0.5 hover:scale-110 transition"
+            @click="ToggleMode"
+            class="hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-1.5 font-medium text-sm cursor-pointer rounded-md flex items-center gap-2 ease-in duration-300 hover:-translate-y-0.5 hover:scale-110 transition"
           >
-            <i class="pi pi-moon"></i>
-            <span class="lg:block hidden">Dev Mode</span>
+            <i class="pi" :class="isDark ? 'pi-sun' : 'pi-moon'"></i>
+            <span class="lg:block hidden">{{
+              isDark ? "Dev Mode" : "Chill Mode"
+            }}</span>
           </p>
 
           <div class="lg:hidden block">
@@ -50,7 +54,7 @@
       <transition name="fade">
         <div
           v-if="isMenuOpen"
-          class="lg:hidden px-6 pt-4 pb-6 flex flex-col space-y-4 text-gray-600 font-medium backdrop-blur-md bg-white/70"
+          class="lg:hidden px-6 pt-4 pb-6 flex flex-col space-y-4 dark:bg-black/80 text-gray-600 dark:text-gray-300 font-medium backdrop-blur-md bg-white/70"
         >
           <a
             v-for="item in navLinks"
@@ -64,9 +68,9 @@
             :href="item.href"
             :class="[
               active === item.href
-                ? 'bg-gray-300 p-2 !text-black rounded-md px-3'
+                ? 'bg-gray-300 p-2 dark:bg-gray-800  dark:!text-white !text-black rounded-md px-3'
                 : '',
-              'hover:text-black ease-in duration-200 transition rounded-md',
+              'hover:text-black dark:hover:text-white ease-in duration-200 transition rounded-md',
             ]"
           >
             {{ item.name }}
@@ -92,6 +96,17 @@ const navLinks = ref([
 const active = ref("");
 const isScrolled = ref(false);
 const isMenuOpen = ref(false);
+const mode = ref("dark");
+const isDark = ref(false);
+
+const ToggleMode = () => {
+  isDark.value = !isDark.value;
+  if (isDark.value) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
 
 const ActiveLink = (item) => {
   active.value = item.href;
@@ -131,7 +146,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style>
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.3s ease;
