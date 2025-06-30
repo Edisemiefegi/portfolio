@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 py-12">
+  <div class="space-y-12 py-12">
     <div class="text-center space-y-4">
       <h1 class="md:text-5xl text-2xl font-bold">Tech Stack</h1>
       <p class="text-gray-700 dark:text-gray-400">
@@ -8,18 +8,18 @@
     </div>
 
     <div
-      class="flex flex-wrap gap-8 md:w-11/12 mx-auto items-center justify-center"
+      class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-8 mx-auto items-center justify-center"
     >
       <div
         v-for="skill in skills"
         :key="skill"
-        class="p-2 rounded-md bg-gray-100 dark:bg-gray-300"
+        class="p-2 w-fit rounded-md bg-gray-100 dark:bg-gray-300"
       >
         <button
           data-aos="fade-up"
           data-aos-duration="300"
           :data-aos-delay="skill.delay"
-          :class="`${skill.color} hover:scale-105  p-8 rounded-md flex flex-col justify-center items-center `"
+          :class="`${skill.color} !transition-transform duration-200 transform scale-100 hover:scale-105 w-40 h-32 rounded-md flex flex-col justify-center items-center `"
         >
           <div class="w-10 h-10">
             <img

@@ -1,9 +1,9 @@
 <template>
   <div class="h-full pt-0 pb-10 md:pt-10">
-    <div class="overflow-hidden space-y-10 relative">
+    <div class="overflow-hidden space-y-16 relative">
       <div class="text-center space-y-4">
         <h1 class="md:text-5xl text-2xl font-bold">My Journey</h1>
-        <p class="text-gray-700 dark:text-gray-400 w-full md:w-10/12 mx-auto">
+        <p class="text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
           I’m a frontend developer focused on building clean, responsive,
           user-first interfaces. I use Vue, Nuxt, React and Tailwind to turn
           ideas into web experiences that work — fast, accessible, and honest.
@@ -28,7 +28,7 @@
         >
           <div
             :data-aos="card.aos"
-            class="bg-white dark:bg-gray-800 w-full dark:text-white hover:-translate-y-1 hover:scale-100 transition-all duration-500 ease-in-out rounded-xl hover:shadow-lg border shadow-sm border-gray-200 dark:border-gray-600 p-6 space-y-2 lg:max-w-lg"
+            class="bg-white dark:bg-gray-800 w-full dark:text-white !transition-all duration-200 transform scale-90 hover:scale-100 rounded-xl hover:shadow-lg border shadow-sm border-gray-200 dark:border-gray-600 p-6 space-y-2 lg:max-w-lg"
             :class="index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'"
           >
             <p class="md:text-2xl text-xl font-bold">{{ card.year }}</p>
@@ -39,7 +39,7 @@
           </div>
 
           <div
-            class="absolute lg:left-1/2 md:transform -top-6 -left-6 lg:-translate-x-1/2 mb-4 md:mb-0 bg-gray-800 border-4 border-white w-14 h-14 rounded-full flex items-center justify-center z-10"
+            class="absolute lg:left-1/2 md:transform -top-6 lg:top-0 -left-6 lg:-translate-x-1/2 mb-4 md:mb-0 bg-gray-800 border-4 border-white w-14 h-14 rounded-full flex items-center justify-center z-10"
           >
             <i :class="card.icon" class="pi text-white text-xl"></i>
           </div>
@@ -50,7 +50,7 @@
       <div class="flex h-full items-center justify-center">
         <div
           data-aos="flip-left"
-          class="p-8 bg-white border border-gray-200 dark:border-gray-600 dark:bg-gray-800 hover:scale-105 shadow-md rounded-md space-y-4 w-xl text-center"
+          class="p-8 bg-white border border-gray-200 dark:border-gray-600 dark:bg-gray-800 !transition-all duration-200 transform scale-90 hover:scale-100 shadow-md rounded-md space-y-4 w-xl text-center"
         >
           <p class="font-bold text-2xl">Beyound the code</p>
           <p class="text-gray-600 dark:text-gray-400 text-start">

@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full relative">
-    <div class="space-y-10 pt-16 mx-auto container xl:px-0 px-4">
+    <div class="space-y-12 pt-16 mx-auto container xl:px-0 px-4">
       <div class="text-center space-y-4">
         <h1 class="md:text-5xl text-2xl font-bold">Let's Build Together</h1>
         <p class="text-gray-700 dark:text-gray-400 max-w-2xl mx-auto">
@@ -110,7 +110,7 @@
                 :key="item.link"
                 :href="item.link"
                 target="_blank"
-                class="w-3/6 p-8 flex flex-col gap-2 cursor-pointer items-center justify-center rounded-sm dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 hover:bg-gray-300 bg-gray-100"
+                class="w-3/6 p-8 flex flex-col gap-2 cursor-pointer items-center justify-center rounded-sm dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 !transition-all duration-200 transform scale-100 hover:scale-110 hover:bg-gray-300 bg-gray-100"
               >
                 <i :class="item.icon"></i>
 

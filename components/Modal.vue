@@ -70,7 +70,7 @@
               :bg="'bg-gray-200'"
               :rounded="'rounded-full'"
               :size="'sm'"
-              v-for="item in content?.button"
+              v-for="item in content?.stack"
               :key="item"
               >{{ item }}</Button
             >

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white cursor-pointer hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 ease-in-out rounded-xl border border-gray-100 dark:border-gray-700 dark:text-white dark:bg-gray-800 shadow-sm flex flex-col items-center"
+    class="!transition-all duration-200 transform scale-100 hover:scale-110 hover:shadow-xl ease-in-out bg-white cursor-pointer rounded-xl border border-gray-100 dark:border-gray-700 dark:text-white dark:bg-gray-800 shadow-sm flex flex-col items-center"
   >
     <div class="h-50 w-full overflow-hidden rounded-t-xl bg-gray-600">
       <img :src="content?.image" alt="" class="object-cover w-full h-full" />

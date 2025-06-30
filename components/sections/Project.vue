@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 py-10 relative">
+  <div class="space-y-12 py-10 relative">
     <div class="text-center space-y-4">
       <h1 class="md:text-5xl text-2xl font-bold">Featured Projects</h1>
       <p class="text-gray-700 dark:text-gray-400">
@@ -50,7 +50,7 @@ const cards = ref([
     text: "A dynamic movie platform that fetches and displays trending, now-playing, and top-rated movies using a clean, modern interface. Built with Vue.js and TMDB API integration.",
     summary:
       "A dynamic movie platform that fetches and displays trending, now-playing, and top-rated movies using a clean, modern interface. ",
-    button: ["Vue.js", "Api", "tailwind"],
+    button: ["Vue.js", "firebase", "tailwind", "..."],
     subheading: "Role: Lead Frontend Developer",
     learnings: [
       "Integrated external APIs and handled asynchronous data efficiently",
@@ -62,7 +62,7 @@ const cards = ref([
       "Maintained clean UI while displaying large amounts of content",
       "Handled image fallbacks and responsive cards",
     ],
-    stack: ["Vue.js", "Pinia", "Tailwind CSS", "TMDB API"],
+    stack: ["Vue.js", "Pinia", "Tailwind CSS", " API", "Firebase"],
     demo: "https://edimov.onrender.com",
     code: "https://github.com/Edisemiefegi/edimov",
   },
@@ -75,7 +75,7 @@ const cards = ref([
     text: "A recipe discovery platform that allows users to filter meals by category, ingredient, and location. Designed to simplify cooking inspiration with clean UI and responsive design.",
     summary:
       "A recipe discovery platform that allows users to filter meals by category, ingredient, and location.",
-    button: ["Vue.js", "Filter", "Tailwind"],
+    button: ["Vue.js", "firebase", "Tailwind", "..."],
     subheading: "Role: Frontend Developer",
     learnings: [
       "Built dynamic filtering logic for seamless user experience",
@@ -87,7 +87,7 @@ const cards = ref([
       "Maintained UI consistency across various devices",
       "Handled incomplete or missing data from recipe sources",
     ],
-    stack: ["Vue.js", "Tailwind CSS"],
+    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
     demo: "https://recipie-app-556v.onrender.com",
     code: "https://github.com/Edisemiefegi/recipie-app",
   },
@@ -100,7 +100,7 @@ const cards = ref([
     text: "A front-end clone of Instagram's core features, including post feeds, likes, and profile views. Built with component-driven development in Vue.js.",
     summary:
       "A front-end clone of Instagram's UI and interactions with emphasis on component reusability.",
-    button: ["Vue.js", "UI", "Tailwind"],
+    button: ["Vue.js", "firebase", "Tailwind", "..."],
     subheading: "Role: Frontend Developer",
     learnings: [
       "Replicated modern social media layouts with clean design",
@@ -112,7 +112,7 @@ const cards = ref([
       "Handled interactive UI elements like likes and image carousels",
       "Created reusable card and modal components",
     ],
-    stack: ["Vue.js", "Tailwind CSS"],
+    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
     demo: "https://instaclone-ni86.onrender.com",
     code: "https://github.com/Edisemiefegi/instaclone",
   },
@@ -125,7 +125,7 @@ const cards = ref([
     text: "A social networking platform built for university communities to connect, share resources, and collaborate. Features include profile creation, forums, and topic-based discussions.",
     summary:
       "A social networking platform for students to connect, collaborate, and share updates in a focused university environment.",
-    button: ["Vue.js", "Nuxt 3", "Tailwind"],
+    button: ["Nuxt 3", "Pinia", "Tailwind", "..."],
     subheading: "Role: Lead Frontend Developer",
     learnings: [
       "Built nested layouts and page transitions with Nuxt 3",
