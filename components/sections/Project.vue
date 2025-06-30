@@ -1,14 +1,17 @@
 <template>
-  <div class="mx-auto w-11/12 space-y-6 relative">
-    <div class="text-center space-y-8">
-      <h1 class="md:text-7xl text-4xl font-bold">Featured Projects</h1>
+  <div class="space-y-6 py-10 relative">
+    <div class="text-center space-y-4">
+      <h1 class="md:text-5xl text-2xl font-bold">Featured Projects</h1>
       <p class="text-gray-700 dark:text-gray-400">
-        Swipe, click, or drag to explore my latest creations...
+        Swipe, or click to explore my latest creations...
       </p>
     </div>
 
     <div class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
       <Card
+        data-aos="fade-up"
+        data-aos-duration="300"
+        :data-aos-delay="card.delay"
         :content="card"
         v-for="card in cards"
         :key="card"
@@ -39,6 +42,8 @@ onMounted(() => {
 
 const cards = ref([
   {
+    delay: "300",
+
     id: 1,
     image: "/project/edimov.png",
     heading: "EdiMov – Movie Explorer",
@@ -59,8 +64,11 @@ const cards = ref([
     ],
     stack: ["Vue.js", "Pinia", "Tailwind CSS", "TMDB API"],
     demo: "https://edimov.onrender.com",
+    code: "https://github.com/Edisemiefegi/edimov",
   },
   {
+    delay: "400",
+
     id: 2,
     image: "/project/edirecipes.png",
     heading: "EdiRecipe – Smart Recipe Finder",
@@ -81,8 +89,11 @@ const cards = ref([
     ],
     stack: ["Vue.js", "Tailwind CSS"],
     demo: "https://recipie-app-556v.onrender.com",
+    code: "https://github.com/Edisemiefegi/recipie-app",
   },
   {
+    delay: "500",
+
     id: 3,
     image: "/project/instaclone.png",
     heading: "InstaClone – Social Media UI",
@@ -103,8 +114,11 @@ const cards = ref([
     ],
     stack: ["Vue.js", "Tailwind CSS"],
     demo: "https://instaclone-ni86.onrender.com",
+    code: "https://github.com/Edisemiefegi/instaclone",
   },
   {
+    delay: "600",
+
     id: 4,
     image: "/project/campus-connect.png",
     heading: "Campus Connect – University Social Network",
@@ -125,6 +139,7 @@ const cards = ref([
     ],
     stack: ["Nuxt 3", "Tailwind CSS", "Pinia", "Firebase"],
     demo: "https://campus-connect-tyzz.onrender.com",
+    code: "https://github.com/Edisemiefegi/campus-connect",
   },
 ]);
 </script>

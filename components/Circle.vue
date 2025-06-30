@@ -1,26 +1,11 @@
 <template>
-  <div class="circle dark:circle-dark"></div>
+  <div
+    class="absolute top-0 z-0 dark:z-0 left-0 w-[70vw] max-w-[700px] aspect-square rounded-full bg-[radial-gradient(circle,#0f172a_0%,#babdc2_50%,#dadada_100%)] dark:opacity-40 dark:bg-[radial-gradient(circle,#1f2937_10%,#374151_50%,#4b5563_90%)] opacity-60 blur-[60px] animate-[floatTilt_10s_ease-in-out_infinite_alternate]"
+  ></div>
 </template>
 
 <style>
-.circle {
-  position: absolute;
-  top: 0%;
-  left: 0;
-  width: 70vw;
-  max-width: 700px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, #0f172a 0%, #babdc2 50%, #dadada 100%);
-  opacity: 0.6;
-  filter: blur(60px);
-  animation: floatTilt 10s ease-in-out infinite alternate;
-  z-index: -1;
-}
-.circle-dark {
-  background: radial-gradient(circle, #dbe0e6 0%, #e5e7eb 50%, #f3f4f6 100%);
-}
-
+/* your keyframes */
 @keyframes floatTilt {
   0% {
     transform: translate(0%, 0%) rotate(0deg);

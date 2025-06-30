@@ -7,7 +7,9 @@
         Scroll,
       ]"
     >
-      <div class="w-11/12 mx-auto py-4 flex justify-between items-center">
+      <div
+        class="container mx-auto py-4 xl:px-0 lg:px-20 px-10 flex justify-between items-center"
+      >
         <div>
           <p class="font-bold text-lg">Efegi Areye Edisemi</p>
         </div>

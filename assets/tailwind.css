@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer components {
+  .circle {
+    @apply absolute top-0 left-0
+           w-[70vw] max-w-[700px]
+           aspect-square rounded-full
+           bg-[radial-gradient(circle,#0f172a_0%,#babdc2_50%,#dadada_100%)]
+           opacity-60 blur-[60px]
+           animate-[floatTilt_10s_ease-in-out_infinite_alternate]
+           -z-10;
+  }
+}
 
 @theme {
   --color-midnight: #121063;

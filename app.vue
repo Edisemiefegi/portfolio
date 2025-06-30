@@ -5,15 +5,15 @@
       <sectionsHome />
     </section>
 
-    <section id="about" class="mx-auto md:w-11/12 w-4/5">
+    <section id="about" class="mx-auto container xl:px-0 px-4">
       <sectionsAbout />
     </section>
 
-    <section id="projects" class="mx-auto md:w-11/12 w-4/5">
+    <section id="projects" class="mx-auto xl:px-0 px-4 container">
       <sectionsProject />
     </section>
 
-    <section id="skills" class="mx-auto md:w-11/12 w-4/5">
+    <section id="skills" class="mx-auto xl:px-0 px-4">
       <sectionsSkills />
     </section>
 
@@ -21,7 +21,7 @@
       <sectionsPlayGround />
     </section> -->
 
-    <section id="contact" class="mb-20">
+    <section id="contact" class="py-10">
       <sectionsContact />
     </section>
   </main>

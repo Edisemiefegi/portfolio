@@ -5,7 +5,7 @@
   >
     <div
       @click.stop
-      class="bg-white relative md:rounded-xl shadow-sm md:w-4/5 md:h-4/5 w-full h-full overflow-y-auto no-scrollbar flex flex-col items-center"
+      class="bg-white relative md:rounded-xl md:w-4/5 md:h-4/5 w-full h-full overflow-y-auto no-scrollbar flex flex-col items-center"
     >
       <button
         @click="emit('close')"
@@ -13,10 +13,12 @@
       >
         <i class="pi pi-times text-sm"></i>
       </button>
-      <div class="h-2/3 w-full overflow-hidden md:rounded-t-xl bg-gray-600">
+      <div
+        class="h-2/3 w-full overflow-hidden md:rounded-t-xl shadow-sm bg-gray-600"
+      >
         <img :src="content?.image" alt="" class="object-cover w-full h-full" />
       </div>
-      <div class="p-12 space-y-6 w-full h-2/5 shadow-sm">
+      <div class="p-12 space-y-6 w-full h-2/5">
         <div class="md:flex-row flex flex-col gap-3 md:justify-between">
           <div class="">
             <h1 class="text-xl md:text-2xl font-bold">
@@ -32,8 +34,7 @@
               :text-color="'black'"
               :border="'border-gray-300 border'"
             >
-              <i class="pi pi-github"></i>
-              Code
+              <a :href="content?.code"> <i class="pi pi-github"></i> Code </a>
             </Button>
             <Button :size="'sm'" class="">
               <a :href="content?.demo">

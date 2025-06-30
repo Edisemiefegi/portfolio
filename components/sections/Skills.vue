@@ -1,15 +1,14 @@
 <template>
   <div class="space-y-6 py-12">
-    <div class="text-center space-y-8">
-      <h1 class="md:text-7xl text-4xl font-bold">Tech Stack</h1>
+    <div class="text-center space-y-4">
+      <h1 class="md:text-5xl text-2xl font-bold">Tech Stack</h1>
       <p class="text-gray-700 dark:text-gray-400">
-        Tools and technologies I use to bring ideas to life. Hover over each
-        skill to learn more about my experience.
+        Tools and technologies I use to bring ideas to life.
       </p>
     </div>
 
     <div
-      class="flex flex-wrap gap-8 w-11/12 mx-auto items-center justify-center"
+      class="flex flex-wrap gap-8 md:w-11/12 mx-auto items-center justify-center"
     >
       <div
         v-for="skill in skills"
@@ -18,7 +17,7 @@
       >
         <button
           data-aos="fade-up"
-          data-aos-duration="100"
+          data-aos-duration="300"
           :data-aos-delay="skill.delay"
           :class="`${skill.color} hover:scale-105  p-8 rounded-md flex flex-col justify-center items-center `"
         >
@@ -35,7 +34,7 @@
     </div>
 
     <div
-      class="flex w-full flex-wrap justify-between gap-3 md:px-20 py-10 items-center"
+      class="flex w-full flex-wrap justify-around gap-3 md:px-20 py-10 items-center"
     >
       <div v-for="item in content" :key="item" class="text-center">
         <p class="md:text-4xl text-2xl">{{ item.icon }}</p>

@@ -1,7 +1,9 @@
 <template>
-  <div class="h-screen md:p-0 p-8 w-full relative">
-    <div class="flex md:w-11/12 w-4/5 mx-auto pt-20 h-full">
-      <div class="z-20 flex-col flex w-full gap-10 justify-center items-center">
+  <div class="h-screen w-full relative">
+    <div class="flex container mx-auto md:pt-20 xl:px-0 px-4 h-full">
+      <div
+        class="z-20 flex-col flex w-full gap-10 justify-center items-center text-center"
+      >
         <h1 data-aos="zoom-out" class="md:text-7xl text-5xl font-bold">
           Efegi Edisemi
         </h1>

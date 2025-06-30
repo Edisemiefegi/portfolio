@@ -1,9 +1,9 @@
 <template>
   <div class="h-full w-full relative">
-    <div class="space-y-10 pt-16 mx-auto w-4/5 md:w-11/12">
-      <div class="text-center space-y-8">
-        <h1 class="md:text-7xl text-4xl font-bold">Let's Build Together</h1>
-        <p class="text-gray-700 dark:text-gray-400">
+    <div class="space-y-10 pt-16 mx-auto container xl:px-0 px-4">
+      <div class="text-center space-y-4">
+        <h1 class="md:text-5xl text-2xl font-bold">Let's Build Together</h1>
+        <p class="text-gray-700 dark:text-gray-400 max-w-2xl mx-auto">
           Got a project in mind? A crazy idea that needs bringing to life? Or
           just want to chat about the latest in web development? I'm all ears!
           👂
@@ -47,7 +47,7 @@
 
             <div>
               <p>Message</p>
-              <input
+              <textarea
                 v-model="form.message"
                 name="message"
                 required
@@ -56,7 +56,9 @@
               />
             </div>
 
-            <Button :bg="'dark:bg-white'" :text-color="'dark:text-black'"
+            <Button
+              :bg="'dark:bg-white bg-black'"
+              :text-color="'dark:text-black text-white'"
               >Send Message</Button
             >
           </form>
