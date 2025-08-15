@@ -8,7 +8,7 @@
     </div>
 
     <div
-      class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-8 mx-auto items-center justify-center"
+      class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 sm:gap-8 mx-auto items-center justify-center"
     >
       <div
         v-for="skill in skills"
@@ -19,7 +19,7 @@
           data-aos="fade-up"
           data-aos-duration="300"
           :data-aos-delay="skill.delay"
-          :class="`${skill.color} !transition-transform duration-200 transform scale-100 hover:scale-105 w-40 h-32 rounded-md flex flex-col justify-center items-center `"
+          :class="`${skill.color} !transition-transform duration-200 transform scale-100 hover:scale-105 w-36 sm:w-40 h-32 rounded-md flex flex-col justify-center items-center `"
         >
           <div class="w-10 h-10">
             <img
@@ -77,6 +77,13 @@ const skills = ref([
     name: "React",
     color: "bg-[#81E1FC]",
   },
+    {
+    icon: "/stack/next.png",
+    delay: "750",
+    name: "Nextjs",
+    color: "bg-[#FFFFFF]",
+  },
+
   {
     icon: "/stack/figma.png",
     delay: "800",

@@ -70,31 +70,6 @@ const cards = ref([
     delay: "400",
 
     id: 2,
-    image: "/project/edirecipes.png",
-    heading: "EdiRecipe – Smart Recipe Finder",
-    text: "A recipe discovery platform that allows users to filter meals by category, ingredient, and location. Designed to simplify cooking inspiration with clean UI and responsive design.",
-    summary:
-      "A recipe discovery platform that allows users to filter meals by category, ingredient, and location.",
-    button: ["Vue.js", "firebase", "Tailwind", "..."],
-    subheading: "Role: Frontend Developer",
-    learnings: [
-      "Built dynamic filtering logic for seamless user experience",
-      "Managed reactive state and data binding with Vue",
-      "Crafted an intuitive UI with responsive grid layout",
-    ],
-    challenge: [
-      "Ensured filters worked efficiently without reloading",
-      "Maintained UI consistency across various devices",
-      "Handled incomplete or missing data from recipe sources",
-    ],
-    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
-    demo: "https://recipie-app-556v.onrender.com",
-    code: "https://github.com/Edisemiefegi/recipie-app",
-  },
-  {
-    delay: "500",
-
-    id: 3,
     image: "/project/instaclone.png",
     heading: "InstaClone – Social Media UI",
     text: "A front-end clone of Instagram's core features, including post feeds, likes, and profile views. Built with component-driven development in Vue.js.",
@@ -116,6 +91,57 @@ const cards = ref([
     demo: "https://instaclone-ni86.onrender.com",
     code: "https://github.com/Edisemiefegi/instaclone",
   },
+
+  {
+    delay: "450",
+
+    id: 3,
+    image: "/project/ediwise.png",
+    heading: "EdiWise – Personal Finance Dashboard",
+    text: "A finance management dashboard built with Next.js and TypeScript, helping users track income, expenses, balances, and net worth over time. Features real-time data updates, interactive charts, and customizable display settings.",
+    summary:
+      "A finance dashboard to track income, expenses, and net worth with real-time insights.",
+    button: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
+    subheading: "Role: Frontend Developer",
+    learnings: [
+      "Leveraged Next.js for optimized performance and SEO-friendly rendering",
+      "Implemented TypeScript for type safety and maintainable code",
+      "Created dynamic chart components to visualize income vs expenses trends",
+    ],
+    challenge: [
+      "Ensured accurate financial calculations and data synchronization",
+      "Optimized chart rendering for large transaction histories",
+      "Designed a responsive, intuitive UI for mobile and desktop users",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+    demo: "https://ediwise.vercel.app/",
+    code: "https://github.com/Edisemiefegi/ediwise",
+  },
+  {
+    delay: "500",
+    id: 3,
+    image: "/project/edirecipes.png",
+    heading: "EdiRecipe – Smart Recipe Finder",
+    text: "A recipe discovery platform that allows users to filter meals by category, ingredient, and location. Designed to simplify cooking inspiration with clean UI and responsive design.",
+    summary:
+      "A recipe discovery platform that allows users to filter meals by category, ingredient, and location.",
+    button: ["Vue.js", "firebase", "Tailwind", "..."],
+    subheading: "Role: Frontend Developer",
+    learnings: [
+      "Built dynamic filtering logic for seamless user experience",
+      "Managed reactive state and data binding with Vue",
+      "Crafted an intuitive UI with responsive grid layout",
+    ],
+    challenge: [
+      "Ensured filters worked efficiently without reloading",
+      "Maintained UI consistency across various devices",
+      "Handled incomplete or missing data from recipe sources",
+    ],
+    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
+    demo: "https://recipie-app-556v.onrender.com",
+    code: "https://github.com/Edisemiefegi/recipie-app",
+  },
+
   {
     delay: "600",
 

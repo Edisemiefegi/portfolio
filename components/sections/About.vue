@@ -83,7 +83,7 @@ const cards = ref([
     aos: "fade-left",
     title: "Casely – Frontend Engineer",
     text: "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
-    year: "Nov 2024 – Present",
+    year: "Nov 2024 – July 2025",
     icon: "pi-briefcase",
     side: "right",
   },
