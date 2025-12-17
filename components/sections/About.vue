@@ -4,9 +4,10 @@
       <div class="text-center space-y-4">
         <h1 class="md:text-5xl text-2xl font-bold">My Journey</h1>
         <p class="text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
-          I’m a frontend developer focused on building clean, responsive,
+          {{ aboutProfile?.bio }}
+          <!-- I’m a frontend developer focused on building clean, responsive,
           user-first interfaces. I use Vue, Nuxt, React and Tailwind to turn
-          ideas into web experiences that work — fast, accessible, and honest.
+          ideas into web experiences that work — fast, accessible, and honest. -->
         </p>
       </div>
 
@@ -22,7 +23,7 @@
         <!-- card loop -->
         <div
           v-for="(card, index) in cards"
-          :key="card.title + card.year"
+          :key="card.company + card.date"
           class="relative flex items-center gap-2 ml-5 lg:ml-0"
           :class="index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end'"
         >
@@ -31,10 +32,10 @@
             class="bg-white dark:bg-gray-800 w-full dark:text-white !transition-all duration-200 transform scale-90 hover:scale-100 rounded-xl hover:shadow-lg border shadow-sm border-gray-200 dark:border-gray-600 p-6 space-y-2 lg:max-w-lg"
             :class="index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'"
           >
-            <p class="md:text-2xl text-xl font-bold">{{ card.year }}</p>
-            <p class="md:text-xl text-lg font-semibold">{{ card.title }}</p>
+            <p class="md:text-2xl text-xl font-bold">{{ card.date }}</p>
+            <p class="md:text-xl text-lg font-semibold">{{ card.company }} - {{ card.role }}</p>
             <p class="text-gray-600 md:text-normal text-sm dark:text-gray-400">
-              {{ card.text }}
+              {{ card.summary }}
             </p>
           </div>
 
@@ -54,13 +55,15 @@
         >
           <p class="font-bold text-2xl">Beyound the code</p>
           <p class="text-gray-600 dark:text-gray-400 text-start">
+                      {{ aboutProfile?.hobbie}}
+<!-- 
             I'm a curious mind and a lifelong learner. Outside of coding, I'm a
             game lover and a big fan of K-Dramas — there’s nothing like a good
             storyline to unwind and recharge. I enjoy exploring design trends,
             sketching ideas, and diving into tech content that challenges my
             thinking. Whether I’m mentoring someone new to tech or collaborating
             on creative ideas, I thrive where curiosity, creativity, and impact
-            meet. ☕ 📸 🚀 🎮 🌱
+            meet. ☕ 📸 🚀 🎮 🌱 -->
           </p>
         </div>
       </div>
@@ -69,49 +72,91 @@
 </template>
 
 <script setup>
-const cards = ref([
-  {
-    aos: "fade-right",
-    title: "OpenProdkt LLC – Software Developer (Part-time)",
-    text: "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
-    year: "Mar 2025 – Present",
-    icon: "pi-briefcase",
-    side: "left",
-  },
+// const cards = ref([
+//   {
+//     aos: "fade-right",
+//     title: "OpenProdkt LLC – Software Developer (Part-time)",
+//     text: "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
+//     year: "Mar 2025 – Present",
+//     icon: "pi-briefcase",
+//     side: "left",
+//   },
 
-  {
-    aos: "fade-left",
-    title: "Casely – Frontend Engineer",
-    text: "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
-    year: "Nov 2024 – July 2025",
-    icon: "pi-briefcase",
-    side: "right",
-  },
-  {
-    aos: "fade-right",
-    title: "Ogilvista – Frontend Engineer ",
-    text: "Enhanced advertising tech platforms using Vue.js. Collaborated on responsive layouts and cross-platform UI improvements.",
-    year: "Sep 2024 – Oct 2024",
-    icon: "pi-briefcase",
-    side: "left",
-  },
-  {
-    aos: "fade-left",
-    title: "Goofer Food – Frontend Engineer",
-    text: "Improved UI consistency by building reusable components and aligning frontend deliverables with team goals.",
-    year: "Oct 2022 – Jan 2023",
-    icon: "pi-briefcase",
-    side: "right",
-  },
-  {
-    aos: "fade-right",
-    title: "Freelance Journey",
-    text: "Developed escrow and fundraising applications using Vue. Collaborated with design teams using Figma to deliver intuitive user experiences.",
-    year: "2021 ",
-    icon: "pi-briefcase",
-    side: "left",
-  },
-]);
+//   {
+//     aos: "fade-left",
+//     title: "Casely – Frontend Engineer",
+//     text: "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
+//     year: "Nov 2024 – July 2025",
+//     icon: "pi-briefcase",
+//     side: "right",
+//   },
+//   {
+//     aos: "fade-right",
+//     title: "Ogilvista – Frontend Engineer ",
+//     text: "Enhanced advertising tech platforms using Vue.js. Collaborated on responsive layouts and cross-platform UI improvements.",
+//     year: "Sep 2024 – Oct 2024",
+//     icon: "pi-briefcase",
+//     side: "left",
+//   },
+//   {
+//     aos: "fade-left",
+//     title: "Goofer Food – Frontend Engineer",
+//     text: "Improved UI consistency by building reusable components and aligning frontend deliverables with team goals.",
+//     year: "Oct 2022 – Jan 2023",
+//     icon: "pi-briefcase",
+//     side: "right",
+//   },
+//   {
+//     aos: "fade-right",
+//     title: "Freelance Journey",
+//     text: "Developed escrow and fundraising applications using Vue. Collaborated with design teams using Figma to deliver intuitive user experiences.",
+//     year: "2021 ",
+//     icon: "pi-briefcase",
+//     side: "left",
+//   },
+// ]);
+
+import { useAdmin } from '~/composable/useAdmin';
+const  {getAboutProfile, listAbouts} = useAdmin()
+
+const aboutProfile = ref(null)
+const Journey = ref(null)
+const rawCards = ref([])
+
+onMounted(async () => {
+
+const [aboutRes, journeyRes] = await Promise.all([
+    getAboutProfile(),
+listAbouts()  ])
+
+  aboutProfile.value = aboutRes?.[0] || null
+  rawCards.value = journeyRes || []
+
+
+//   const res = await getAboutProfile()
+//   aboutProfile.value = res[0]
+//   console.log(aboutProfile.value, 'abo0');
+// console.log('happy');
+
+// Journey.value = await listAbouts()
+
+})
+
+const cards = computed(() =>
+  rawCards.value.map((item, index) => {
+    const isEven = index % 2 === 0
+
+    return {
+      ...item,
+
+      // UI-only logic
+      side: isEven ? 'left' : 'right',
+      aos: isEven ? 'fade-right' : 'fade-left',
+      icon: 'pi-briefcase',
+    }
+  })
+)
+
 </script>
 
 <style lang="scss" scoped></style>

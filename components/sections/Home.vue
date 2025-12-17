@@ -4,9 +4,14 @@
       <div
         class="z-20 flex-col flex w-full gap-10 justify-center items-center text-center"
       >
-        <h1 data-aos="zoom-out" class="md:text-7xl text-5xl font-bold">
+        <div>
+          <h1 data-aos="zoom-out" class="md:text-7xl text-5xl font-bold">
           Efegi Edisemi
         </h1>
+        <!-- <div class="border-2 border-red-700  w-96 h-96">
+          <img src="/public/didi.PNG" class="w-96 h-96" alt="">
+        </div> -->
+        </div>
         <h2
           data-aos-duration="1000"
           data-aos="zoom-out"

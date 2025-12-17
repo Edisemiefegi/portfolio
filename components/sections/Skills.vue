@@ -106,12 +106,12 @@ const content = ref([
   },
   {
     icon: "🚀",
-    number: "50+",
+    number: "20+",
     text: "Projects Built ",
   },
   {
     icon: "📝",
-    number: "100K+",
+    number: "50K+",
     text: "Lines of Code",
   },
 ]);

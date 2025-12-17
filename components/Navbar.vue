@@ -1,3 +1,4 @@
+(
 <template>
   <div class="relative dark:bg-gray-800">
     <header
@@ -16,7 +17,7 @@
 
         <div class="flex gap-8 items-center">
           <!-- Desktop Nav -->
-          <div v-for="item in navLinks" :key="item" class="lg:block hidden">
+          <div v-for="item in props.navLinks" :key="item" class="lg:block hidden">
             <nav class="flex gap-6 text-gray-500 font-medium text-normal">
               <a
                 @click="ActiveLink(item)"
@@ -59,7 +60,7 @@
           class="lg:hidden px-6 pt-4 pb-6 flex flex-col space-y-4 dark:bg-black/80 text-gray-600 dark:text-gray-300 font-medium backdrop-blur-md bg-white/70"
         >
           <a
-            v-for="item in navLinks"
+            v-for="item in props.navLinks"
             :key="item.href"
             @click="
               () => {
@@ -86,14 +87,26 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
-const navLinks = ref([
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Project", href: "#projects" },
-  { name: "Skill", href: "#skills" },
-  { name: "Playground", href: "#playground" },
-  { name: "Contact", href: "#contact" },
-]);
+// const navLinks = ref([
+//   { name: "Home", href: "#home" },
+//   { name: "About", href: "#about" },
+//   { name: "Project", href: "#projects" },
+//   { name: "Skill", href: "#skills" },
+//   { name: "Contact", href: "#contact" },
+// ]);
+
+const props = defineProps({
+  navLinks: {
+    type: Array,
+    default: () => [
+      { name: "Home", href: "#home" },
+      { name: "About", href: "#about" },
+      { name: "Project", href: "#projects" },
+      { name: "Skill", href: "#skills" },
+      { name: "Contact", href: "#contact" },
+    ],
+  },
+});
 
 const active = ref("");
 const isScrolled = ref(false);
@@ -121,7 +134,8 @@ const Scroll = computed(() => {
 });
 
 const updateActiveLink = () => {
-  for (const item of navLinks.value) {
+  for (const item of props.navLinks) {
+      if (!item.href.startsWith("#")) continue;
     const section = document.querySelector(item.href);
     if (section) {
       const rect = section.getBoundingClientRect();
@@ -159,3 +173,4 @@ onUnmounted(() => {
   transform: translateY(-10px);
 }
 </style>
+)

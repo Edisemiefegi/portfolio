@@ -53,6 +53,7 @@ const buttonClass = computed(() => {
     "ease-in-out",
     sizeClasses[props.size],
     props.border,
+    "cursor-pointer"
   ];
 });
 </script>

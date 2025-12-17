@@ -22,9 +22,9 @@
         <div class="md:flex-row flex flex-col gap-3 md:justify-between">
           <div class="">
             <h1 class="text-xl md:text-2xl font-bold">
-              {{ content?.heading }}
+              {{ content?.title }}
             </h1>
-            <p class="font-medium my-2">{{ content?.subheading }}</p>
+            <p class="font-medium my-2">{{ content?.role }}</p>
           </div>
 
           <div class="flex h-fit gap-4">
@@ -34,10 +34,10 @@
               :text-color="'black'"
               :border="'border-gray-300 border'"
             >
-              <a :href="content?.code"> <i class="pi pi-github"></i> Code </a>
+              <a :href="content?.githubLink"> <i class="pi pi-github"></i> Code </a>
             </Button>
             <Button :size="'sm'" class="">
-              <a :href="content?.demo">
+              <a :href="content?.url">
                 <i class="pi pi-external-link"></i>
                 Live Demo
               </a>
@@ -45,12 +45,12 @@
           </div>
         </div>
 
-        <p class="text-gray-600">{{ content?.text }}</p>
+        <p class="text-gray-600">{{ content?.description }}</p>
 
         <div class="md:flex-row flex flex-col gap-3 md:justify-between">
           <div>
             <p class="text-xl md:text-2xl font-bold mb-2">Key Learnings</p>
-            <ul v-for="item in content?.learnings" :key="item">
+            <ul v-for="item in content?.learning" :key="item">
               <li class="list-disc my-4 text-gray-600">{{ item }}</li>
             </ul>
           </div>
