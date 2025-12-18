@@ -8,6 +8,8 @@ const aboutProfileId = "about_profile";
 export const useAdmin = () => {
   const loading = ref(false);
   const error = ref(null);
+  const { tableDB,  storage } = useAppwrite()
+
 
   const createProject = async (payload) => {
     loading.value = true;
