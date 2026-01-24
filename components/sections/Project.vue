@@ -3,7 +3,7 @@
     <div class="text-center space-y-4">
       <h1 class="md:text-5xl text-2xl font-bold">Featured Projects</h1>
       <p class="text-gray-700 dark:text-gray-400">
-        Swipe, or click to explore my latest creations...
+        Click to explore my latest creations...
       </p>
     </div>
 

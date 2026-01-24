@@ -1,6 +1,5 @@
-
+import { account} from "../utils/appwrite"
 export const useAuth = () => {
-  const {  account } = useAppwrite()
 
   const user = useState('auth-user', () => undefined) 
   // undefined = not checked yet

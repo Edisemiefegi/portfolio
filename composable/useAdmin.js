@@ -4,11 +4,11 @@ const image = "projectImages";
 const skill = "skills";
 const aboutTableId = "about";
 const aboutProfileId = "about_profile";
+import { tableDB, storage } from "../utils/appwrite";
 
 export const useAdmin = () => {
   const loading = ref(false);
   const error = ref(null);
-  const { tableDB,  storage } = useAppwrite()
 
 
   const createProject = async (payload) => {

@@ -1,9 +1,10 @@
 export const useAppwrite = () => {
-  const { $appwrite } = useNuxtApp()
+  const nuxtApp = useNuxtApp();
+  return nuxtApp.$appwrite || null
 
-  if (!$appwrite) {
-    throw new Error('Appwrite not initialized')
+  if (!nuxtApp.$appwrite) {
+    throw new Error("Appwrite not initialized (client only)");
   }
 
-  return $appwrite
-}
+  return nuxtApp.$appwrite;
+};
