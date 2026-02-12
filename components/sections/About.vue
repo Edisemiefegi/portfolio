@@ -32,8 +32,8 @@
             class="bg-white dark:bg-gray-800 w-full dark:text-white !transition-all duration-200 transform scale-90 hover:scale-100 rounded-xl hover:shadow-lg border shadow-sm border-gray-200 dark:border-gray-600 p-6 space-y-2 lg:max-w-lg"
             :class="index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'"
           >
-            <p class="md:text-2xl text-xl font-bold">{{ card.date }}</p>
-            <p class="md:text-xl text-lg font-semibold">{{ card.company }} - {{ card.role }}</p>
+            <p class="md:text-2xl text-xl font-bold">{{ card.company }}</p>
+            <p class="md:text-xl text-lg font-semibold">{{ card.date }} - {{ card.role }}</p>
             <p class="text-gray-600 md:text-normal text-sm dark:text-gray-400">
               {{ card.summary }}
             </p>
