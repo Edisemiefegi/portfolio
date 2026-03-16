@@ -19,7 +19,7 @@
           data-aos="fade-up"
           data-aos-duration="300"
           :data-aos-delay="skill.delay"
-          :class="`${skill.color} !transition-transform duration-200 transform scale-100 hover:scale-105 w-36 sm:w-40 h-32 rounded-md flex flex-col justify-center items-center `"
+          :class="`${skill?.color} !transition-transform duration-200 transform scale-100 hover:scale-105 w-36 sm:w-40 h-32 rounded-md flex flex-col justify-center items-center `"
         >
           <div class="w-10 h-10">
             <img
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div
+    <!-- <div
       class="flex w-full flex-wrap justify-around gap-3 md:px-20 py-10 items-center"
     >
       <div v-for="item in content" :key="item" class="text-center">
@@ -41,7 +41,7 @@
         <p class="md:text-4xl text-2xl font-bold">{{ item.number }}</p>
         <p class="text-gray-600 dark:text-gray-400">{{ item.text }}</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -81,7 +81,6 @@ const skills = ref([
     icon: "/stack/next.png",
     delay: "750",
     name: "Nextjs",
-    color: "bg-[#FFFFFF]",
   },
 
   {
@@ -106,7 +105,7 @@ const content = ref([
   },
   {
     icon: "🚀",
-    number: "20+",
+    number: "10+",
     text: "Projects Built ",
   },
   {

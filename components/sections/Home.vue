@@ -1,16 +1,25 @@
 <template>
-  <div class="h-screen w-full relative">
+  <div class="h-screen w-full relative x overflow-hidden">
     <div class="flex container mx-auto md:pt-20 xl:px-0 px-4 h-full">
       <div
         class="z-20 flex-col flex w-full gap-10 justify-center items-center text-center"
       >
         <div>
           <h1 data-aos="zoom-out" class="md:text-7xl text-5xl font-bold">
-          Efegi Edisemi
-        </h1>
-        <!-- <div class="border-2 border-red-700  w-96 h-96">
-          <img src="/public/didi.PNG" class="w-96 h-96" alt="">
-        </div> -->
+            Efegi Edisemi
+          </h1>
+          <div class="absolute sm:right-0 -right-26 bottom-0 w-fit">
+            <div class="relative">
+              <img
+                src="/public/didi.PNG"
+                class="w-96 h-96 object-cover"
+                alt=""
+              />
+              <span
+                class="w-full left-0 bg-black/40 rounded-md blur-sm absolute -bottom-5 p-4"
+              ></span>
+            </div>
+          </div>
         </div>
         <h2
           data-aos-duration="1000"
@@ -22,7 +31,7 @@
         <p
           data-aos-duration="1000"
           data-aos="zoom-out"
-          class="text-gray-600 dark:text-gray-400 md:text-lg text-normal font-medium w-full md:w-6/12 text-center"
+          class="text-gray-500 dark:text-gray-300 md:text-lg text-normal font-medium w-full md:w-6/12 text-center"
         >
           Frontend Developer crafting immersive digital experiences with code,
           creativity, and a touch of magic ✨

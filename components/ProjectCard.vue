@@ -7,12 +7,12 @@
     </div>
     <div class="md:p-8 p-4 space-y-3 w-full">
       <h1 class="text-normal md:text-xl font-bold">{{ content?.title }}</h1>
-      <p class="text-gray-600 dark:text-gray-400 line-clamp-3">{{ content?.description}}</p>
+      <p class="text-gray-600 text-sm dark:text-gray-400 line-clamp-3">{{ content?.description}}</p>
       <div class="flex gap-2 w-full flex-wrap">
         <Button
-          class="text-xs"
+          class="text-xs! py-0.5! px-2! "
           :text-color="'text-black '"
-          :bg="'bg-gray-200'"
+          :bg="'bg-neutral-300'"
           :rounded="'rounded-full'"
           :size="'sm'"
           v-for="item in content?.stack"

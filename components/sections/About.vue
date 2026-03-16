@@ -1,14 +1,11 @@
 <template>
-  <div class="h-full pt-0 pb-10 md:pt-10">
+  <div class="h-full pb-10 pt-10">
     <div class="overflow-hidden space-y-16 relative">
       <div class="text-center space-y-4">
         <h1 class="md:text-5xl text-2xl font-bold">My Journey</h1>
         <p class="text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
-          {{ aboutProfile?.bio }}
-          <!-- I’m a frontend developer focused on building clean, responsive,
-          user-first interfaces. I use Vue, Nuxt, React and Tailwind to turn
-          ideas into web experiences that work — fast, accessible, and honest. -->
-        </p>
+          <!-- {{ aboutProfile?.bio }} -->
+I’m a frontend developer who enjoys building thoughtful interfaces and bringing designs to life on the web. I love working with modern tools, paying attention to detail, and constantly improving how users experience products.        </p>
       </div>
 
       <div class="lg:space-y-16 space-y-8 w-full relative h-fit">
@@ -33,7 +30,9 @@
             :class="index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'"
           >
             <p class="md:text-2xl text-xl font-bold">{{ card.company }}</p>
-            <p class="md:text-xl text-lg font-semibold">{{ card.date }} - {{ card.role }}</p>
+            <p class="md:text-xl text-lg font-semibold">
+              {{ card.date }} - {{ card.role }}
+            </p>
             <p class="text-gray-600 md:text-normal text-sm dark:text-gray-400">
               {{ card.summary }}
             </p>
@@ -55,15 +54,13 @@
         >
           <p class="font-bold text-2xl">Beyound the code</p>
           <p class="text-gray-600 dark:text-gray-400 text-start">
-                      {{ aboutProfile?.hobbie}}
-<!-- 
-            I'm a curious mind and a lifelong learner. Outside of coding, I'm a
-            game lover and a big fan of K-Dramas — there’s nothing like a good
-            storyline to unwind and recharge. I enjoy exploring design trends,
-            sketching ideas, and diving into tech content that challenges my
-            thinking. Whether I’m mentoring someone new to tech or collaborating
-            on creative ideas, I thrive where curiosity, creativity, and impact
-            meet. ☕ 📸 🚀 🎮 🌱 -->
+            {{ aboutProfile?.hobbie }}
+            Beyond coding, I enjoy exploring new ideas, journaling my thoughts,
+            and engaging with meaningful conversations. I value continuous
+            learning, intentional living, and the belief that small, consistent
+            efforts lead to lasting impact. In my free time, I enjoy watching
+            K-dramas and anime. Naturally reserved, I’m intentionally growing
+            into a more confident and outgoing version of myself.
           </p>
         </div>
       </div>
@@ -72,91 +69,93 @@
 </template>
 
 <script setup>
-// const cards = ref([
-//   {
-//     aos: "fade-right",
-//     title: "OpenProdkt LLC – Software Developer (Part-time)",
-//     text: "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
-//     year: "Mar 2025 – Present",
-//     icon: "pi-briefcase",
-//     side: "left",
-//   },
+const cards = ref([
+  {
+    aos: "fade-right",
+    company: "OpenProdkt LLC – Software Developer (Part-time)",
+    summary:
+      "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
+    date: "Mar 2025 – Present",
+    icon: "pi-briefcase",
+    side: "left",
+  },
 
-//   {
-//     aos: "fade-left",
-//     title: "Casely – Frontend Engineer",
-//     text: "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
-//     year: "Nov 2024 – July 2025",
-//     icon: "pi-briefcase",
-//     side: "right",
-//   },
-//   {
-//     aos: "fade-right",
-//     title: "Ogilvista – Frontend Engineer ",
-//     text: "Enhanced advertising tech platforms using Vue.js. Collaborated on responsive layouts and cross-platform UI improvements.",
-//     year: "Sep 2024 – Oct 2024",
-//     icon: "pi-briefcase",
-//     side: "left",
-//   },
-//   {
-//     aos: "fade-left",
-//     title: "Goofer Food – Frontend Engineer",
-//     text: "Improved UI consistency by building reusable components and aligning frontend deliverables with team goals.",
-//     year: "Oct 2022 – Jan 2023",
-//     icon: "pi-briefcase",
-//     side: "right",
-//   },
-//   {
-//     aos: "fade-right",
-//     title: "Freelance Journey",
-//     text: "Developed escrow and fundraising applications using Vue. Collaborated with design teams using Figma to deliver intuitive user experiences.",
-//     year: "2021 ",
-//     icon: "pi-briefcase",
-//     side: "left",
-//   },
-// ]);
+  {
+    aos: "fade-left",
+    company: "Casely – Frontend Engineer",
+    summary:
+      "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
+    date: "Nov 2024 – July 2025",
+    icon: "pi-briefcase",
+    side: "right",
+  },
+  {
+    aos: "fade-right",
+    company: "Ogilvista – Frontend Engineer ",
+    summary:
+      "Enhanced advertising tech platforms using Vue.js. Collaborated on responsive layouts and cross-platform UI improvements.",
+    date: "Sep 2024 – Oct 2024",
+    icon: "pi-briefcase",
+    side: "left",
+  },
+  {
+    aos: "fade-left",
+    company: "Goofer Food – Frontend Engineer",
+    summary:
+      "Improved UI consistency by building reusable components and aligning frontend deliverables with team goals.",
+    date: "Oct 2022 – Jan 2023",
+    icon: "pi-briefcase",
+    side: "right",
+  },
+  {
+    aos: "fade-right",
+    company: "Freelance Journey",
+    summary:
+      "Developed escrow and fundraising applications using Vue. Collaborated with design teams using Figma to deliver intuitive user experiences.",
+    date: "2021 ",
+    icon: "pi-briefcase",
+    side: "left",
+  },
+]);
 
-import { useAdmin } from '~/composable/useAdmin';
-const  {getAboutProfile, listAbouts} = useAdmin()
+import { useAdmin } from "~/composable/useAdmin";
+const { getAboutProfile, listAbouts } = useAdmin();
 
-const aboutProfile = ref(null)
-const Journey = ref(null)
-const rawCards = ref([])
+const aboutProfile = ref(null);
+const Journey = ref(null);
+const rawCards = ref([]);
 
 onMounted(async () => {
-
-const [aboutRes, journeyRes] = await Promise.all([
+  const [aboutRes, journeyRes] = await Promise.all([
     getAboutProfile(),
-listAbouts()  ])
+    listAbouts(),
+  ]);
 
-  aboutProfile.value = aboutRes?.[0] || null
-  rawCards.value = journeyRes || []
+  aboutProfile.value = aboutRes?.[0] || null;
+  rawCards.value = journeyRes || [];
 
+  //   const res = await getAboutProfile()
+  //   aboutProfile.value = res[0]
+  //   console.log(aboutProfile.value, 'abo0');
+  // console.log('happy');
 
-//   const res = await getAboutProfile()
-//   aboutProfile.value = res[0]
-//   console.log(aboutProfile.value, 'abo0');
-// console.log('happy');
+  // Journey.value = await listAbouts()
+});
 
-// Journey.value = await listAbouts()
-
-})
-
-const cards = computed(() =>
+const cardss = computed(() =>
   rawCards.value.map((item, index) => {
-    const isEven = index % 2 === 0
+    const isEven = index % 2 === 0;
 
     return {
       ...item,
 
       // UI-only logic
-      side: isEven ? 'left' : 'right',
-      aos: isEven ? 'fade-right' : 'fade-left',
-      icon: 'pi-briefcase',
-    }
-  })
-)
-
+      side: isEven ? "left" : "right",
+      aos: isEven ? "fade-right" : "fade-left",
+      icon: "pi-briefcase",
+    };
+  }),
+);
 </script>
 
 <style lang="scss" scoped></style>

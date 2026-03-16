@@ -17,7 +17,11 @@
 
         <div class="flex gap-8 items-center">
           <!-- Desktop Nav -->
-          <div v-for="item in props.navLinks" :key="item" class="lg:block hidden">
+          <div
+            v-for="item in props.navLinks"
+            :key="item"
+            class="lg:block hidden"
+          >
             <nav class="flex gap-6 text-gray-500 font-medium text-normal">
               <a
                 @click="ActiveLink(item)"
@@ -87,14 +91,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
-// const navLinks = ref([
-//   { name: "Home", href: "#home" },
-//   { name: "About", href: "#about" },
-//   { name: "Project", href: "#projects" },
-//   { name: "Skill", href: "#skills" },
-//   { name: "Contact", href: "#contact" },
-// ]);
-
 const props = defineProps({
   navLinks: {
     type: Array,
@@ -111,18 +107,19 @@ const props = defineProps({
 const active = ref("");
 const isScrolled = ref(false);
 const isMenuOpen = ref(false);
-const mode = ref("dark");
-const isDark = ref(false);
+const isDark = ref(true);
 
 const ToggleMode = () => {
   isDark.value = !isDark.value;
+
   if (isDark.value) {
     document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
   }
 };
-
 const ActiveLink = (item) => {
   active.value = item.href;
 };
@@ -135,7 +132,7 @@ const Scroll = computed(() => {
 
 const updateActiveLink = () => {
   for (const item of props.navLinks) {
-      if (!item.href.startsWith("#")) continue;
+    if (!item.href.startsWith("#")) continue;
     const section = document.querySelector(item.href);
     if (section) {
       const rect = section.getBoundingClientRect();
@@ -151,8 +148,17 @@ const checkScroll = () => {
   isScrolled.value = window.scrollY > 0;
   updateActiveLink();
 };
-
 onMounted(() => {
+  const savedMode = localStorage.getItem("theme");
+
+  if (savedMode === "light") {
+    isDark.value = false;
+    document.documentElement.classList.remove("dark");
+  } else {
+    isDark.value = true;
+    document.documentElement.classList.add("dark");
+  }
+
   window.addEventListener("scroll", checkScroll);
   updateActiveLink();
 });
