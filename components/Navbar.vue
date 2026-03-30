@@ -107,7 +107,7 @@ const props = defineProps({
 const active = ref("");
 const isScrolled = ref(false);
 const isMenuOpen = ref(false);
-const isDark = ref(true);
+const isDark = ref(false);
 
 const ToggleMode = () => {
   isDark.value = !isDark.value;
