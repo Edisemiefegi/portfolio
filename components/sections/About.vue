@@ -75,7 +75,7 @@ const cards = ref([
     company: "OpenProdkt LLC – Software Developer (Part-time)",
     summary:
       "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
-    date: "Mar 2025 – Present",
+    date: "Mar 2025 – Oct 2025",
     icon: "pi-briefcase",
     side: "left",
   },
@@ -85,7 +85,7 @@ const cards = ref([
     company: "Casely – Frontend Engineer",
     summary:
       "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
-    date: "Nov 2024 – July 2025",
+    date: "Nov 2024 – Feb 2025",
     icon: "pi-briefcase",
     side: "right",
   },
@@ -112,7 +112,7 @@ const cards = ref([
     company: "Freelance Journey",
     summary:
       "Developed escrow and fundraising applications using Vue. Collaborated with design teams using Figma to deliver intuitive user experiences.",
-    date: "2021 ",
+    date: "2022 ",
     icon: "pi-briefcase",
     side: "left",
   },

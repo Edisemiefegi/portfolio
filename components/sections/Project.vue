@@ -45,131 +45,180 @@ onMounted(() => {
 const cards = ref([
   {
     delay: "300",
-
     id: 1,
-    image: "/project/edimov.png",
-    title: "EdiMov – Movie Explorer",
-    text: "A dynamic movie platform that fetches and displays trending, now-playing, and top-rated movies using a clean, modern interface. Built with Vue.js and TMDB API integration.",
+    image: "/project/helpmebook.png",
+    title: "HelpMeBook – Hotel Booking Platform",
+    text: "A hotel booking platform connecting users with hotels through a guided, preference-based experience with role-based dashboards.",
     description:
-      "A dynamic movie platform that fetches and displays trending, now-playing, and top-rated movies using a clean, modern interface. ",
-    button: ["Vue.js", "firebase", "tailwind", "..."],
-    subheading: "Role: Lead Frontend Developer",
-    learning: [
-      "Integrated external APIs and handled asynchronous data efficiently",
-      " Implemented dynamic routing and state management",
-      " Designed user-friendly, responsive layouts",
-    ],
-    challenge: [
-      "Ensured smooth loading of movie data with error handling",
-      "Maintained clean UI while displaying large amounts of content",
-      "Handled image fallbacks and responsive cards",
-    ],
-    stack: ["Vue.js", "Pinia", "Tailwind CSS", " API", "Firebase"],
-    url: "https://edimov.onrender.com",
-    githubLink: "https://github.com/Edisemiefegi/edimov",
-  },
-  {
-    delay: "400",
-
-    id: 2,
-    image: "/project/instaclone.png",
-    title: "InstaClone – Social Media UI",
-    text: "A front-end clone of Instagram's core features, including post feeds, likes, and profile views. Built with component-driven development in Vue.js.",
-    description:
-      "A front-end clone of Instagram's UI and interactions with emphasis on component reusability.",
-    button: ["Vue.js", "firebase", "Tailwind", "..."],
+      "A third-party hotel booking platform with guided user flows, partner dashboards, and real-time booking interactions.",
+    button: ["React.js", "Typescript", "Tailwind CSS", "..."],
     subheading: "Role: Frontend Developer",
     learning: [
-      "Replicated modern social media layouts with clean design",
-      "Used Vue components to enhance reusability and structure",
-      "Practiced responsive design patterns",
+      "Built structured booking flows based on user preferences like budget and stay needs",
+      "Designed role-based dashboards for admins and hotel partners",
+      "Handled dynamic UI states for multi-step booking interactions",
     ],
     challenge: [
-      "Ensured layout accuracy and pixel-perfect rendering",
-      "Handled interactive UI elements like likes and image carousels",
-      "Created reusable card and modal components",
+      "Managing complex booking states across multiple steps",
+      "Designing scalable dashboards for different user roles",
+      "Ensuring smooth UX across devices",
     ],
-    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
-    url: "https://instaclone-ni86.onrender.com",
-    githubLink: "https://github.com/Edisemiefegi/instaclone",
+    stack: ["React.js", "Typescript", "Tailwind CSS", "API"],
+    url: "http://helpmebook.com.ng/",
+    githubLink: "",
   },
 
   {
-    delay: "450",
+    delay: "350",
+    id: 2,
+    image: "/project/moments.png",
+    title: "Moments – AI Date Planning Platform",
+    text: "An AI-powered platform for creating and sharing personalized date experiences with timelines, real place suggestions, and custom letters.",
+    description:
+      "A date planning platform featuring AI-generated ideas, timelines, and shareable invitations with personalized letter writing.",
+    button: ["React.js", "Typescript", "Tailwind CSS", "..."],
+    subheading: "Role: Frontend Developer",
+    learning: [
+      "Integrated AI-driven features for generating date ideas and place suggestions",
+      "Designed interactive timelines for structuring date experiences",
+      "Built shareable invitation flows with personalized letter features",
+    ],
+    challenge: [
+      "Designing engaging UX for personalized interactions",
+      "Handling dynamic content across timelines and invitations",
+      "Balancing feature complexity with clean UI",
+    ],
+    stack: ["React.js", "Typescript", "Tailwind CSS", "API"],
+    url: "https://momentsblues.vercel.app/",
+    githubLink: "https://github.com/Edisemiefegi/moments",
+  },
 
+  {
+    delay: "400",
     id: 3,
     image: "/project/ediwise.png",
-   title: "EdiWise – Personal Finance Dashboard",
-    text: "A finance management dashboard built with Next.js and TypeScript, helping users track income, expenses, balances, and net worth over time. Features real-time data updates, interactive charts, and customizable display settings.",
+    title: "EdiWise – Personal Finance Dashboard",
+    text: "A finance dashboard helping users track income, expenses, and net worth with real-time insights and interactive charts.",
     description:
       "A finance dashboard to track income, expenses, and net worth with real-time insights.",
     button: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
     subheading: "Role: Frontend Developer",
     learning: [
-      "Leveraged Next.js for optimized performance and SEO-friendly rendering",
-      "Implemented TypeScript for type safety and maintainable code",
-      "Created dynamic chart components to visualize income vs expenses trends",
+      "Used Next.js for performance optimization and rendering",
+      "Applied TypeScript for scalable and maintainable code",
+      "Built interactive chart components for financial data",
     ],
     challenge: [
-      "Ensured accurate financial calculations and data synchronization",
-      "Optimized chart rendering for large transaction histories",
-      "Designed a responsive, intuitive UI for mobile and desktop users",
+      "Ensuring accurate financial calculations",
+      "Optimizing performance for large datasets",
+      "Designing intuitive financial UI",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     url: "https://ediwise.vercel.app/",
     githubLink: "https://github.com/Edisemiefegi/ediwise",
   },
-  {
-    delay: "500",
-    id: 3,
-    image: "/project/edirecipes.png",
-    title: "EdiRecipe – Smart Recipe Finder",
-    text: "A recipe discovery platform that allows users to filter meals by category, ingredient, and location. Designed to simplify cooking inspiration with clean UI and responsive design.",
-    description:
-      "A recipe discovery platform that allows users to filter meals by category, ingredient, and location.",
-    button: ["Vue.js", "firebase", "Tailwind", "..."],
-    subheading: "Role: Frontend Developer",
-    learning: [
-      "Built dynamic filtering logic for seamless user experience",
-      "Managed reactive state and data binding with Vue",
-      "Crafted an intuitive UI with responsive grid layout",
-    ],
-    challenge: [
-      "Ensured filters worked efficiently without reloading",
-      "Maintained UI consistency across various devices",
-      "Handled incomplete or missing data from recipe sources",
-    ],
-    stack: ["Vue.js", "Tailwind CSS", "firebase", "Pinia"],
-    url: "https://recipie-app-556v.onrender.com",
-    githubLink: "https://github.com/Edisemiefegi/recipie-app",
-  },
 
   {
-    delay: "600",
-
+    delay: "450",
     id: 4,
     image: "/project/campus-connect.png",
     title: "Campus Connect – University Social Network",
-    text: "A social networking platform built for university communities to connect, share resources, and collaborate. Features include profile creation, forums, and topic-based discussions.",
+    text: "A social platform for students to connect, collaborate, and share updates through forums and discussions.",
     description:
-      "A social networking platform for students to connect, collaborate, and share updates in a focused university environment.",
+      "A social networking platform for university communities with profiles, forums, and structured discussions.",
     button: ["Nuxt 3", "Pinia", "Tailwind", "..."],
     subheading: "Role: Lead Frontend Developer",
     learning: [
-      "Built nested layouts and page transitions with Nuxt 3",
-      "Implemented dynamic routing and authentication logic",
-      "Created forum-like interaction flows for real-world simulation",
+      "Built nested layouts and routing with Nuxt 3",
+      "Implemented authentication and protected routes",
+      "Designed forum-style interaction flows",
     ],
     challenge: [
-      "Managed nested layouts and route-based content updates",
-      "Ensured authentication flow with navigation guards",
-      "Balanced UI simplicity with multiple feature sets",
+      "Managing nested layouts and dynamic content",
+      "Handling authentication and navigation guards",
+      "Maintaining UI clarity with multiple features",
     ],
     stack: ["Nuxt 3", "Tailwind CSS", "Pinia", "Firebase"],
     url: "https://campus-connect-tyzz.onrender.com",
     githubLink: "https://github.com/Edisemiefegi/campus-connect",
   },
+
+  {
+    delay: "500",
+    id: 5,
+    image: "/project/edimov.png",
+    title: "EdiMov – Movie Explorer",
+    text: "A movie platform displaying trending and popular content using API integration and dynamic UI.",
+    description:
+      "A movie platform that fetches and displays trending and top-rated content.",
+    button: ["Vue.js", "Firebase", "Tailwind", "..."],
+    subheading: "Role: Lead Frontend Developer",
+    learning: [
+      "Integrated external APIs efficiently",
+      "Handled dynamic routing and state",
+      "Designed responsive UI layouts",
+    ],
+    challenge: [
+      "Managing large data display cleanly",
+      "Handling loading states and errors",
+      "Ensuring responsive design",
+    ],
+    stack: ["Vue.js", "Pinia", "Tailwind CSS", "API", "Firebase"],
+    url: "https://edimov.onrender.com",
+    githubLink: "https://github.com/Edisemiefegi/edimov",
+  },
+
+  {
+    delay: "550",
+    id: 6,
+    image: "/project/instaclone.png",
+    title: "InstaClone – Social Media UI",
+    text: "A frontend clone of Instagram focusing on UI interactions and component-based architecture.",
+    description:
+      "A social media UI clone focused on layout accuracy and reusable components.",
+    button: ["Vue.js", "Firebase", "Tailwind", "..."],
+    subheading: "Role: Frontend Developer",
+    learning: [
+      "Practiced component-driven architecture",
+      "Built responsive layouts",
+      "Improved UI consistency",
+    ],
+    challenge: [
+      "Achieving pixel-perfect UI",
+      "Handling interactive elements",
+      "Maintaining reusable components",
+    ],
+    stack: ["Vue.js", "Tailwind CSS", "Firebase", "Pinia"],
+    url: "https://instaclone-ni86.onrender.com",
+    githubLink: "https://github.com/Edisemiefegi/instaclone",
+  },
+
+  {
+    delay: "600",
+    id: 7,
+    image: "/project/edirecipes.png",
+    title: "EdiRecipe – Smart Recipe Finder",
+    text: "A recipe discovery platform with filtering by category and ingredients.",
+    description:
+      "A recipe platform focused on search and filtering.",
+    button: ["Vue.js", "Firebase", "Tailwind", "..."],
+    subheading: "Role: Frontend Developer",
+    learning: [
+      "Built filtering logic",
+      "Managed reactive state",
+      "Designed responsive UI",
+    ],
+    challenge: [
+      "Efficient filtering without reload",
+      "Handling missing data",
+      "Maintaining UI consistency",
+    ],
+    stack: ["Vue.js", "Tailwind CSS", "Firebase", "Pinia"],
+    url: "https://recipie-app-556v.onrender.com",
+    githubLink: "https://github.com/Edisemiefegi/recipie-app",
+  },
 ]);
+
 const { listProjects } = useAdmin();
 
 const projects = ref([]);
