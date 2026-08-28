@@ -70,25 +70,26 @@ I’m a frontend developer who enjoys building thoughtful interfaces and bringin
 
 <script setup>
 const cards = ref([
+
   {
     aos: "fade-right",
+    company: "Glown – Frontend Engineer",
+    summary:
+      "Developed and maintained responsive frontend features for a booking and management platform serving salons, barbershops, spas, and beauty businesses in Nigeria.",
+    date: "Nov 2025 – Jul 2026",
+    icon: "pi-briefcase",
+    side: "left",
+  },
+  {
+    aos: "fade-left",
     company: "OpenProdkt LLC – Software Developer (Part-time)",
     summary:
       "Contributing to a greenfield cloud-native platform for small enterprises. Designing scalable components, maintaining high availability, and ensuring observability using modern tooling.",
     date: "Mar 2025 – Oct 2025",
     icon: "pi-briefcase",
-    side: "left",
-  },
-
-  {
-    aos: "fade-left",
-    company: "Casely – Frontend Engineer",
-    summary:
-      "Built and optimized front-end components for a legal tech platform using React, Tailwind, and TypeScript.",
-    date: "Nov 2024 – Feb 2025",
-    icon: "pi-briefcase",
     side: "right",
   },
+
   {
     aos: "fade-right",
     company: "Ogilvista – Frontend Engineer ",
