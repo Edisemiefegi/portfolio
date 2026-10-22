@@ -27,14 +27,26 @@
           <AdminField v-model="form.location" label="Location" />
           <AdminField v-model="form.timezone" label="Timezone" hint="IANA name, e.g. Africa/Lagos" />
         </div>
-        <AdminField v-model="form.photo" label="Photo URL" hint="Path in /public (e.g. /didi.PNG) or full URL" />
+        <div class="flex items-end gap-2">
+          <div class="flex-1"><AdminField v-model="form.photo" label="Photo" hint="Upload, or paste a full URL" /></div>
+          <label class="btn-ghost shrink-0 text-sm">
+            <i class="pi pi-upload mr-1 text-xs" /> {{ uploading === "photo" ? "Uploading…" : "Upload" }}
+            <input type="file" accept="image/*" class="hidden" @change="upload('photo', $event)" />
+          </label>
+        </div>
       </section>
 
       <section class="panel space-y-5 p-6">
         <p class="font-mono text-xs tracking-widest text-muted uppercase">Contact &amp; links</p>
         <div class="grid gap-4 sm:grid-cols-2">
           <AdminField v-model="form.email" label="Email" type="email" hint="Contact-form messages are sent here" />
-          <AdminField v-model="form.resume" label="Résumé URL" />
+          <div class="flex items-end gap-2">
+            <div class="min-w-0 flex-1"><AdminField v-model="form.resume" label="Résumé" hint="Upload a PDF, or paste a full URL" /></div>
+            <label class="btn-ghost shrink-0 text-sm">
+              <i class="pi pi-upload mr-1 text-xs" /> {{ uploading === "resume" ? "Uploading…" : "Upload" }}
+              <input type="file" accept=".pdf,application/pdf" class="hidden" @change="upload('resume', $event)" />
+            </label>
+          </div>
           <AdminField v-model="form.github" label="GitHub" type="url" />
           <AdminField v-model="form.linkedin" label="LinkedIn" type="url" />
           <AdminField v-model="form.twitter" label="X / Twitter" type="url" />
@@ -49,7 +61,7 @@
 </template>
 
 <script setup>
-import { useAdmin } from "~/composable/useAdmin";
+import { useAdmin, fileUrl } from "~/composable/useAdmin";
 import { useToast, reportSkipped } from "~/composable/useToast";
 import { defaultProfile } from "~/data/defaults";
 
@@ -73,6 +85,23 @@ onMounted(async () => {
     toast.error(`Couldn't load profile: ${e.message}`);
   }
 });
+
+// Uploads to Appwrite storage and saves the profile so the new file is live straight away.
+const uploading = ref(null);
+const upload = async (field, e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  uploading.value = field;
+  try {
+    form.value[field] = fileUrl(await api.uploadImage(file));
+    await submit();
+  } catch (err) {
+    toast.error(`Upload failed: ${err.message}. Check the "projectImages" bucket allows this file type.`);
+  } finally {
+    uploading.value = null;
+  }
+};
 
 const submit = async () => {
   try {
