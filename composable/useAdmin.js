@@ -1,221 +1,90 @@
-const db_Id = "692c73d700038ff2f45a";
-const projects = "projects";
-const image = "projectImages";
-const skill = "skills";
-const aboutTableId = "about";
-const aboutProfileId = "about_profile";
-import { tableDB, storage } from "../utils/appwrite";
+import { tableDB, storage, ID } from "../utils/appwrite";
+
+export const DB_ID = "692c73d700038ff2f45a";
+export const BUCKET_ID = "projectImages";
+export const TABLES = {
+  projects: "projects",
+  experiences: "about",
+  profile: "about_profile",
+  skills: "skills",
+};
+
+// Appwrite rejects rows containing columns that don't exist on the table.
+// We retry with only the columns it accepts and report the ones you still need to add.
+const unknownColumn = (err) => {
+  const m = String(err?.message || "").match(/Unknown attribute: "?([\w-]+)"?/i);
+  return m ? m[1] : null;
+};
+
+const writeRow = async (fn, data, skipped = []) => {
+  try {
+    const row = await fn(data);
+    return { row, skipped };
+  } catch (err) {
+    const col = unknownColumn(err);
+    if (!col || !(col in data)) throw err;
+    const { [col]: _, ...rest } = data;
+    if (!Object.keys(rest).length) throw new Error(`Table is missing columns: ${[...skipped, col].join(", ")}`);
+    return writeRow(fn, rest, [...skipped, col]);
+  }
+};
+
+export const fileUrl = (id) => {
+  if (!id) return "";
+  if (/^(https?:|\/|data:|blob:)/.test(id)) return id;
+  return storage.getFileView({ bucketId: BUCKET_ID, fileId: id }).toString();
+};
 
 export const useAdmin = () => {
   const loading = ref(false);
   const error = ref(null);
 
-
-  const createProject = async (payload) => {
+  const run = async (fn) => {
     loading.value = true;
     error.value = null;
-
     try {
-      const id = ID.unique();
-      console.log("initial PAYLOAD:", payload);
-
-      // convert stack from string to array
-      if (typeof payload.stack === "string") {
-        payload.stack = payload.stack
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean);
-      }
-
-      console.log("FINAL PAYLOAD:", payload);
-
-      // upload image if provided
-      if (payload.image instanceof File) {
-        const fileId = ID.unique();
-        const uploaded = await storage.createFile(image, fileId, payload.image);
-
-        payload.image = uploaded.$id;
-      }
-
-      const doc = await tableDB.createRow({
-        databaseId: db_Id,
-        tableId: projects,
-        rowId: id,
-        data: payload,
-      });
-
-      return doc;
+      return await fn();
     } catch (err) {
-      console.log("CREATE PROJECT ERROR:", err);
-      error.value = err.message || "Something went wrong";
+      error.value = err?.message || "Something went wrong";
+      throw err;
     } finally {
       loading.value = false;
     }
   };
 
-  const listProjects = async () => {
-    loading.value = true;
-    try {
-      const res = await tableDB.listRows({
-        databaseId: db_Id,
-        tableId: projects,
-        queries: [],
-      });
+  const list = (table) =>
+    run(async () => {
+      const res = await tableDB.listRows({ databaseId: DB_ID, tableId: TABLES[table] });
       return res.rows;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteProject = async (id) => {
-    await tableDB.deleteRow({
-      databaseId: db_Id,
-      tableId: projects,
-      rowId: id,
     });
-  };
 
-  const editProject = async (id, payload) => {
-    try {
-      const cleanPayload = {
-        title: payload.title,
-        stack: payload.stack,
-        url: payload.url,
-        githubLink: payload.githubLink,
-        description: payload.description,
-        status: payload.status,
-      };
-      if (payload.image instanceof File) {
-        const uploaded = await storage.createFile(
-          "projectImages",
-          ID.unique(),
-          payload.image
-        );
-        cleanPayload.image = uploaded.$id;
-      }
+  const create = (table, data) =>
+    run(() =>
+      writeRow(
+        (d) => tableDB.createRow({ databaseId: DB_ID, tableId: TABLES[table], rowId: ID.unique(), data: d }),
+        data,
+      ),
+    );
 
-      const promise = tableDB.updateRow(db_Id, projects, id, cleanPayload);
+  const update = (table, id, data) =>
+    run(() =>
+      writeRow(
+        (d) => tableDB.updateRow({ databaseId: DB_ID, tableId: TABLES[table], rowId: id, data: d }),
+        data,
+      ),
+    );
 
-      return promise;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const remove = (table, id) =>
+    run(() => tableDB.deleteRow({ databaseId: DB_ID, tableId: TABLES[table], rowId: id }));
 
-  const addStack = async () => {
-    try {
-      const id = ID.unique();
-
-      const doc = await tableDB.createRow();
-    } catch (error) {}
-  };
-
-  const createAbout = async (payload) => {
-    loading.value = true;
-    try {
-      const id = ID.unique();
-
-      const doc = await tableDB.createRow({
-        databaseId: db_Id,
-        tableId: aboutTableId,
-        rowId: id,
-        data: payload,
-      });
-
-      return doc;
-    } catch (err) {
-      console.error("CREATE ABOUT ERROR:", err);
-      throw err;
-    } finally {
-      loading.value = false;
-    }
-  };
-
-  const deleteAboutSection = async (id) => {
-    await tableDB.deleteRow({
-      databaseId: db_Id,
-      tableId: aboutTableId,
-      rowId: id,
+  const uploadImage = (file) =>
+    run(async () => {
+      const uploaded = await storage.createFile({ bucketId: BUCKET_ID, fileId: ID.unique(), file });
+      return uploaded.$id;
     });
-  };
-  const editAbout = async (id, payload) => {
-    loading.value = true;
-    try {
-      const cleanPayload = {
-        company: payload.company,
-        role: payload.role,
-        summary: payload.summary,
-        date: payload.date,
-      };
-      const updated = await tableDB.updateRow({
-        databaseId: db_Id,
-        tableId: aboutTableId,
-        rowId: id,
-        data: cleanPayload,
-      });
-      return updated;
-    } catch (err) {
-      console.error("EDIT ABOUT ERROR:", err);
-      throw err;
-    } finally {
-      loading.value = false;
-    }
-  };
 
-  const updateAboutProfile = async (id, payload) => {
-    const updated = await tableDB.updateRow({
-      databaseId: db_Id,
-      tableId: aboutTableId,
-      rowId: id,
-      data: { bio: payload.bio, hobbie: payload.hobbie },
-    });
-    return updated;
-  };
+  // Keeps only the fields we own, so Appwrite system fields ($id, $createdAt...) are never written back.
+  const pick = (obj, keys) => Object.fromEntries(keys.filter((k) => obj[k] !== undefined).map((k) => [k, obj[k]]));
 
-  const getAboutProfile = async () => {
-    try {
-      const res = await tableDB.listRows({
-        databaseId: db_Id,
-        tableId: aboutProfileId,
-      });
-
-      return res.rows;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  };
-
-  const listAbouts = async () => {
-    loading.value = true;
-    try {
-      const res = await tableDB.listRows({
-        databaseId: db_Id,
-        tableId: aboutTableId,
-        queries: [],
-      });
-      return res.rows;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    } finally {
-      loading.value = false;
-    }
-  };
-
-  return {
-    createProject,
-    loading,
-    error,
-    listProjects,
-    deleteProject,
-    editProject,
-    createAbout,
-    editAbout,
-    listAbouts,
-    deleteAboutSection,
-    addStack,
-    updateAboutProfile,
-    getAboutProfile,
-  };
+  return { loading, error, list, create, update, remove, uploadImage, pick };
 };

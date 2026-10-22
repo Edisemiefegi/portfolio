@@ -1,193 +1,89 @@
 <template>
-  <main class="mx-auto space-y-12 w-10/12 mb-20 container">
-    <Button
-      @click="
-        isEditing = false;
-        data = emptyForm();
-        openModal = true;
-      "
-      class=""
-      ><i class="pi pi-plus" /> Add New Project</Button
-    >
+  <div>
+    <header class="mb-8 flex items-center justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-medium">Projects</h1>
+        <p class="text-sm text-muted">Drafts are hidden from the live site.</p>
+      </div>
+      <button class="btn-primary" @click="openNew"><i class="pi pi-plus mr-1 text-xs" /> New project</button>
+    </header>
 
-    <div
-      v-if="openModal"
-      class="fixed inset-0 h-full bg-black/50 backdrop-blur-md flex items-center justify-center z-50"
-    >
-      <ProjectModal
-        :form="data"
-        :is-editing="isEditing"
-        @close="openModal = false"
-        class="h-full sm:h-10/12 w-full sm:w-fit overflow-y-scroll"
-      />
-    </div>
+    <AdminEmpty v-if="ready && !rows.length" @import="importSeed" @add="openNew" />
 
-    <Table :headers="headers" unique-id="ref" :data="projects">
-      <template #title="{ row }">
-        <!-- project -->
-        <div class="flex items-center gap-3 w-30">
-          <img :src="row.image" class="w-12 h-12 rounded-lg object-cover" />
-          <div>
-            <p class="font-semibold text-gray-800">{{ row.title }}</p>
-            <p class="text-gray-500 text-sm line-clamp-1">
-              {{ row.description }}
-            </p>
-          </div>
+    <ul class="space-y-3">
+      <li v-for="p in sorted" :key="p.$id" class="panel flex items-center gap-4 p-3">
+        <img :src="fileUrl(p.image)" alt="" class="h-16 w-24 shrink-0 rounded-lg bg-raised object-cover object-top" />
+        <div class="min-w-0 flex-1">
+          <p class="flex items-center gap-2 truncate font-medium">
+            {{ p.title }}
+            <span class="rounded-full px-2 py-0.5 text-[10px] uppercase" :class="p.status === 'draft' ? 'bg-amber-400/15 text-amber-300' : 'bg-accent/15 text-accent'">{{ p.status || "published" }}</span>
+          </p>
+          <p class="truncate text-sm text-muted">{{ p.stack?.join(" · ") }}</p>
         </div>
-      </template>
+        <AdminRowActions @move="move(p, $event)" @edit="openEdit(p)" @delete="remove(p, p.title)" />
+      </li>
+    </ul>
 
-      <!-- stack -->
-
-      <template #stack="{ row }">
-        <div class="flex flex-wrap gap-2">
-          <span
-            v-for="tech in row.stack"
-            :key="tech"
-            :class="[
-              'px-3 py-1 text-xs rounded-full font-medium',
-              getColorFor(tech).bg,
-              getColorFor(tech).text,
-            ]"
-          >
-            {{ tech }}
-          </span>
+    <AdminDrawer :open="drawer" :title="editingId ? 'Edit project' : 'New project'" :busy="api.loading.value || uploading" @close="drawer = false" @submit="submit">
+      <div>
+        <span class="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Cover image</span>
+        <label class="group relative flex aspect-video cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-dashed border-line bg-raised">
+          <img v-if="preview" :src="preview" class="absolute inset-0 h-full w-full object-cover object-top" />
+          <span class="relative rounded-full bg-ink/80 px-3 py-1.5 text-sm"><i class="pi pi-image mr-1 text-xs" /> {{ preview ? "Replace" : "Upload" }} image</span>
+          <input type="file" accept="image/*" class="hidden" @change="pickFile" />
+        </label>
+      </div>
+      <AdminField v-model="form.title" label="Title" required />
+      <AdminField v-model="form.description" label="Description" type="textarea" />
+      <AdminField v-model="form.role" label="Your role" placeholder="Frontend Developer" />
+      <AdminTagInput v-model="form.stack" label="Tech stack" placeholder="Vue, Nuxt, Tailwind… (Enter to add)" />
+      <div class="grid gap-4 sm:grid-cols-2">
+        <AdminField v-model="form.url" label="Live URL" type="url" placeholder="https://" />
+        <AdminField v-model="form.githubLink" label="GitHub URL" type="url" placeholder="https://github.com/…" />
+      </div>
+      <AdminTagInput v-model="form.challenge" label="Challenges solved" placeholder="Add a challenge" block />
+      <AdminTagInput v-model="form.learning" label="What you did / learned" placeholder="Add a point" block />
+      <div>
+        <span class="mb-1.5 block text-xs font-medium tracking-wide text-muted uppercase">Status</span>
+        <div class="flex gap-2">
+          <button v-for="s in ['published', 'draft']" :key="s" type="button" class="rounded-full border px-4 py-1.5 text-sm capitalize" :class="form.status === s ? 'border-accent bg-accent text-ink' : 'border-line'" @click="form.status = s">{{ s }}</button>
         </div>
-      </template>
-
-      <!-- status -->
-      <template #status="{ row }">
-        <span
-          :class="[
-            'px-3 py-1 text-xs rounded-full font-medium',
-            row.status === 'published' ? 'bg-green-100 text-green-700' : '',
-            row.status === 'draft' ? 'bg-yellow-100 text-yellow-700' : '',
-          ]"
-        >
-          {{ row.status }}
-        </span>
-      </template>
-
-      <!-- updated -->
-      <template #updated_at="{ row }">
-        <span class="text-gray-600">
-          {{ new Date(row.$updatedAt).toLocaleDateString() }}
-        </span>
-      </template>
-
-      <!-- action -->
-      <template #action="{ row }">
-        <div class="flex items-center gap-3">
-          <Button
-            @click="openEditModal(row)"
-            bg="bg-white"
-            text-color="text-blue-600"
-            class="pi pi-pencil"
-          >
-          </Button>
-
-          <Button
-            bg="bg-white"
-            text-color="text-red-600"
-            class="pi pi-trash"
-            @click="handledelete(row)"
-          >
-          </Button>
-        </div>
-      </template>
-    </Table>
-  </main>
+      </div>
+    </AdminDrawer>
+  </div>
 </template>
 
 <script setup>
-import ProjectModal from "~/components/ProjectModal.vue";
-import { useAdmin } from "~/composable/useAdmin";
+import { useCollection } from "~/composable/useCollection";
+import { fileUrl } from "~/composable/useAdmin";
+import { defaultProjects } from "~/data/defaults";
 
-definePageMeta({
-  layout: "dashboard",
-  // middleware: 'auth'
+definePageMeta({ layout: "dashboard", middleware: "auth" });
+
+const { api, toast, rows, sorted, form, editingId, drawer, ready, openNew, openEdit, save, remove, move, importSeed } = useCollection("projects", {
+  fields: ["title", "description", "role", "stack", "url", "githubLink", "challenge", "learning", "status", "image"],
+  blank: () => ({ title: "", description: "", role: "", stack: [], url: "", githubLink: "", challenge: [], learning: [], status: "published", image: "" }),
+  seed: defaultProjects,
 });
 
-const { listProjects, deleteProject } = useAdmin();
-const projects = ref([]);
+const file = ref(null);
+const uploading = ref(false);
+const preview = computed(() => (file.value ? URL.createObjectURL(file.value) : fileUrl(form.value.image)));
+watch(drawer, () => (file.value = null));
 
-onMounted(async () => {
-  const res = await listProjects();
-  const allProject = res.map((p) => ({
-    ...p,
-    ref: p.$id,
-    image: storage.getFileDownload({
-      bucketId: "projectImages",
-      fileId: p.image,
-    }),
-  }));
+const pickFile = (e) => (file.value = e.target.files[0] || null);
 
-  projects.value = allProject.filter((e) => e.status == "published");
-
-  console.log(projects.value, "projects ");
-});
-
-const openModal = ref(false);
-const isEditing = ref(false);
-
-const emptyForm = () => ({
-  title: "",
-  stack: [],
-  url: "",
-  githubLink: "",
-  description: "",
-  status: "",
-  image: "",
-  role: "",
-  challenge: [],
-  learning: []
-});
-
-const data = ref(emptyForm());
-
-const headers = [
-  { title: "Project", field: "title", slot: "title" },
-  { title: "Tech Stack", field: "stack", slot: "stack" },
-  { title: "Status", field: "status", slot: "status" },
-  { title: "Last Updated", field: "updated_at", slot: "updated_at" },
-  { title: "Actions", field: "actions", slot: "action" },
-];
-
-const handledelete = async (row) => {
-  const ok = confirm("Delete this section?");
-  if (!ok) return;
-  await deleteProject(row.$id);
-  alert("delete successful");
-};
-
-const openEditModal = (row) => {
-  isEditing.value = true;
-  console.log(data.value, "b");
-  data.value = { ...row, stack: [...row.stack], id: row.$id };
-
-  console.log(data.value, "a");
-  openModal.value = true;
-};
-
-const randomColors = [
-  { bg: "bg-red-100", text: "text-red-700" },
-  { bg: "bg-green-100", text: "text-green-700" },
-  { bg: "bg-blue-100", text: "text-blue-700" },
-  { bg: "bg-purple-100", text: "text-purple-700" },
-  { bg: "bg-yellow-100", text: "text-yellow-700" },
-  { bg: "bg-pink-100", text: "text-pink-700" },
-  { bg: "bg-indigo-100", text: "text-indigo-700" },
-];
-
-const colorMap = ref({});
-
-function getColorFor(tech) {
-  if (!colorMap.value[tech]) {
-    const random =
-      randomColors[Math.floor(Math.random() * randomColors.length)];
-    colorMap.value[tech] = random;
+const submit = async () => {
+  if (file.value) {
+    uploading.value = true;
+    try {
+      form.value.image = await api.uploadImage(file.value);
+    } catch (e) {
+      uploading.value = false;
+      return toast.error(`Image upload failed: ${e.message}`);
+    }
+    uploading.value = false;
   }
-  return colorMap.value[tech];
-}
+  await save();
+};
 </script>
-
-<style lang="scss" scoped></style>

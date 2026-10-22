@@ -1,116 +1,59 @@
 <template>
-  <main class="mx-auto mb-20 space-y-12 w-10/12 container">
-    <div
-      class="grid grid-cols-2 md:grid-cols-3 justify-between gap-4 text-gray-700"
-    >
-      <Card v-for="item in stat" :key="item.name" class="w-full">
-        <div :class="item.bg" class="rounded-md py-1 px-2 w-fit">
-          <i :class="item.icon"></i>
-        </div>
-        <p>{{ item.name }}</p>
-        <p class="font-bold text-lg">{{ item.number }}</p>
-      </Card>
+  <div>
+    <header class="mb-8">
+      <p class="font-mono text-xs tracking-widest text-accent uppercase">Welcome back</p>
+      <h1 class="text-3xl font-medium">Portfolio studio</h1>
+      <p class="text-sm text-muted">Changes you save here go live on your site immediately — no redeploy.</p>
+    </header>
+
+    <div class="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <NuxtLink v-for="s in stats" :key="s.label" :to="s.to" class="panel p-5 transition hover:border-accent/40">
+        <i class="pi mb-4 text-accent" :class="s.icon" />
+        <p class="text-3xl font-medium">{{ s.value ?? "—" }}</p>
+        <p class="text-sm text-muted">{{ s.label }}</p>
+      </NuxtLink>
     </div>
 
-    <!-- quick action -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <Card class="space-y-5">
-        <p class="text-lg font-bold">Quick Actions</p>
-        <div class="flex flex-col gap-4">
-          <Button class="w-full"
-            ><i class="pi pi-plus" /> Add New Project</Button
-          >
-          <Button
-            @click="navigateTo('/dashboard/about')"
-            class="w-full"
-            bg="bg-gray-300"
-            text-color="text-black"
-            ><i class="pi pi-file-edit" /> Edit About Section</Button
-          >
+    <div class="grid gap-4 md:grid-cols-2">
+      <section class="panel p-6">
+        <p class="mb-4 font-medium">Quick actions</p>
+        <div class="grid gap-2">
+          <NuxtLink to="/dashboard/projects" class="btn-ghost"><i class="pi pi-plus mr-2 text-xs" /> Add a project</NuxtLink>
+          <NuxtLink to="/dashboard/experience" class="btn-ghost"><i class="pi pi-briefcase mr-2 text-xs" /> Update experience</NuxtLink>
+          <NuxtLink to="/dashboard/profile" class="btn-ghost"><i class="pi pi-user mr-2 text-xs" /> Edit bio &amp; availability</NuxtLink>
         </div>
-      </Card>
-
-      <!-- skilld -->
-      <Card class="space-y-5">
-        <div class="flex justify-between">
-          <p class="text-lg font-bold">Skills</p>
-          <Button
-            @click="addSkill = true"
-            bg="bg-white"
-            text-color="text-blue-700"
-            class="!font-normal"
-            ><i class="pi pi-plus" /> Add Skill</Button
-          >
-        </div>
-
-        <div v-if="addSkill" class="">
-          <Input placeholder="enter skill name.." />
-        </div>
-        <div class="flex gap-4">
-          <Button
-            v-for="item in Skills"
-            key="item"
-            bg="bg-blue-100"
-            text-color="text-blue-700"
-            class="!font-normal text-xs !rounded-full !px-1.5 !py-1"
-            >{{ item }}</Button
-          >
-        </div>
-      </Card>
+      </section>
+      <section class="panel p-6">
+        <p class="mb-4 font-medium">How it works</p>
+        <ol class="list-decimal space-y-2 pl-4 text-sm text-muted">
+          <li>Empty sections fall back to the built-in content, so the site is never blank.</li>
+          <li>On an empty section, click <span class="text-fg">Import current content</span> to copy it into Appwrite and start editing.</li>
+          <li>Set a project to <span class="text-fg">Draft</span> to hide it without deleting.</li>
+          <li>Use the ↑ ↓ arrows to reorder items.</li>
+        </ol>
+      </section>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup>
 import { useAdmin } from "~/composable/useAdmin";
 
-definePageMeta({
-  layout: "dashboard",
-  // middleware: 'auth'
-});
+definePageMeta({ layout: "dashboard", middleware: "auth" });
 
-const { listProjects } = useAdmin();
-
-const addSkill = ref(false);
-const allProject = ref([]);
+const api = useAdmin();
+const counts = ref({});
 
 onMounted(async () => {
-  allProject.value = await listProjects();
-  console.log(allProject.value, Published.value, "all");
+  const tables = ["projects", "experiences", "skills"];
+  const results = await Promise.allSettled(tables.map((t) => api.list(t)));
+  results.forEach((r, i) => (counts.value[tables[i]] = r.status === "fulfilled" ? r.value : null));
 });
 
-const Published = computed(() =>
-  allProject.value.filter((e) => e.status === "published")
-);
-
-const Draft = computed(() =>
-  allProject.value.filter((e) => e.status == "draft")
-);
-
-const stat = computed(() => [
-  {
-    name: "Total Project",
-    number: allProject.value.length,
-    icon: "pi pi-folder text-blue-800",
-    bg: "bg-blue-200",
-  },
-  {
-    name: "Published",
-    number: Published.value.length,
-    icon: "pi pi-check-circle text-green-800",
-    bg: "bg-green-200",
-  },
-  {
-    name: "Draft",
-    number: Draft.value.length,
-    icon: "pi pi-exclamation-circle text-purple-800",
-    bg: "bg-purple-200",
-  },
+const stats = computed(() => [
+  { label: "Projects", value: counts.value.projects?.length, to: "/dashboard/projects", icon: "pi-folder" },
+  { label: "Published", value: counts.value.projects?.filter((p) => p.status !== "draft").length, to: "/dashboard/projects", icon: "pi-eye" },
+  { label: "Roles", value: counts.value.experiences?.length, to: "/dashboard/experience", icon: "pi-briefcase" },
+  { label: "Skills", value: counts.value.skills?.length, to: "/dashboard/skills", icon: "pi-code" },
 ]);
-
-console.log(stat, "state");
-
-const Skills = ref(["Vue", "Nuxt", "React", "Next", "Typescript"]);
 </script>
-
-<style lang="scss" scoped></style>
